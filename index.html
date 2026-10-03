@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gracia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #000;
+    --paper: #fff;
+    --ease: cubic-bezier(0.22, 1.42, 0.36, 1);
+    --dur: 460ms;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100dvh;
+    position: relative;
+    padding:
+      max(36px, env(safe-area-inset-top))
+      28px
+      max(36px, env(safe-area-inset-bottom));
+  }
+
+  .view { display: none; }
+  .view.is-on { display: block; }
+
+  h1 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+  }
+
+  .home {
+    padding-top: 18vh;
+  }
+
+  .prompt {
+    appearance: none;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid #000;
+    color: inherit;
+    font: inherit;
+    font-size: 1rem;
+    padding: 14px 0;
+    margin-top: 48px;
+    cursor: pointer;
+    min-height: 48px;
+  }
+
+  .prompt:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 6px;
+  }
+
+  .welcome {
+    padding-top: 22vh;
+  }
+
+  .welcome p {
+    margin: 20px 0 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur) var(--ease);
+    z-index: 10;
+  }
+
+  .scrim.is-on {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sheet {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    width: min(430px, 100%);
+    height: 50dvh;
+    min-height: 320px;
+    max-height: 520px;
+    background: #fff;
+    color: #000;
+    border-radius: 22px 22px 0 0;
+    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.08);
+    padding:
+      18px
+      24px
+      max(28px, env(safe-area-inset-bottom));
+    z-index: 20;
+    transform: translate(-50%, 110%);
+    transition: transform var(--dur) var(--ease);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sheet.is-on {
+    transform: translate(-50%, 0);
+  }
+
+  .sheet-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 36px;
+  }
+
+  .close {
+    appearance: none;
+    background: none;
+    border: 0;
+    font: inherit;
+    font-size: 0.85rem;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .close:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+  }
+
+  .sheet h2 {
+    margin: 8px 0 0;
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .digits {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .digits input {
+    width: 64px;
+    height: 72px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background: #fff;
+    color: #000;
+    font: inherit;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 0;
+    caret-color: #000;
+  }
+
+  .digits input:focus {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+  }
+
+  .error {
+    min-height: 1.4em;
+    margin: 16px 0 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .go {
+    appearance: none;
+    margin-top: auto;
+    width: 100%;
+    min-height: 52px;
+    border: 1px solid #000;
+    border-radius: 12px;
+    background: #000;
+    color: #fff;
+    font: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .go:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scrim, .sheet { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <main id="home" class="view home is-on">
+      <h1>Gracia, escuelita bíblica infantil</h1>
+      <button type="button" class="prompt" id="open-sheet">Ingresa el código</button>
+    </main>
+
+    <section id="done" class="view welcome" hidden>
+      <h1>Test uno</h1>
+      <p>Bienvenido, niño. Test uno.</p>
+    </section>
+  </div>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+    <div class="sheet-top">
+      <button type="button" class="close" id="close-sheet" aria-label="Cerrar">×</button>
+    </div>
+    <h2 id="sheet-title">Ingresa el código de tu niño.</h2>
+    <div class="digits" id="digits">
+      <input inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Dígito 1" enterkeyhint="next">
+      <input inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Dígito 2" enterkeyhint="next">
+      <input inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Dígito 3" enterkeyhint="next">
+      <input inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Dígito 4" enterkeyhint="done">
+    </div>
+    <p class="error" id="error" role="alert"></p>
+    <button type="button" class="go" id="continue">Continuar</button>
+  </section>
+
+<script>
+(function () {
+  var CODE = "1234";
+  var home = document.getElementById("home");
+  var done = document.getElementById("done");
+  var scrim = document.getElementById("scrim");
+  var sheet = document.getElementById("sheet");
+  var openBtn = document.getElementById("open-sheet");
+  var closeBtn = document.getElementById("close-sheet");
+  var goBtn = document.getElementById("continue");
+  var error = document.getElementById("error");
+  var boxes = Array.prototype.slice.call(document.querySelectorAll("#digits input"));
+
+  function onlyDigit(value) {
+    var m = String(value || "").replace(/\D/g, "");
+    return m ? m.charAt(0) : "";
+  }
+
+  function openSheet() {
+    error.textContent = "";
+    scrim.hidden = false;
+    sheet.hidden = false;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        scrim.classList.add("is-on");
+        sheet.classList.add("is-on");
+      });
+    });
+    setTimeout(function () { boxes[0].focus(); }, 80);
+  }
+
+  function closeSheet() {
+    scrim.classList.remove("is-on");
+    sheet.classList.remove("is-on");
+    setTimeout(function () {
+      if (!sheet.classList.contains("is-on")) {
+        scrim.hidden = true;
+        sheet.hidden = true;
+      }
+    }, 480);
+    openBtn.focus();
+  }
+
+  function fail() {
+    error.textContent = "Código incorrecto. Intenta de nuevo.";
+    boxes.forEach(function (box) { box.value = ""; });
+    boxes[0].focus();
+  }
+
+  function succeed() {
+    scrim.classList.remove("is-on");
+    sheet.classList.remove("is-on");
+    scrim.hidden = true;
+    sheet.hidden = true;
+    home.classList.remove("is-on");
+    home.hidden = true;
+    done.hidden = false;
+    done.classList.add("is-on");
+  }
+
+  openBtn.addEventListener("click", openSheet);
+  closeBtn.addEventListener("click", closeSheet);
+  scrim.addEventListener("click", closeSheet);
+
+  boxes.forEach(function (box, i) {
+    box.addEventListener("input", function () {
+      var raw = box.value.replace(/\D/g, "");
+      if (raw.length > 1) {
+        raw.split("").slice(0, boxes.length - i).forEach(function (ch, offset) {
+          boxes[i + offset].value = ch;
+        });
+        var next = Math.min(i + raw.length, boxes.length - 1);
+        boxes[next].focus();
+        return;
+      }
+      box.value = onlyDigit(raw);
+      if (box.value && i < boxes.length - 1) boxes[i + 1].focus();
+    });
+
+    box.addEventListener("keydown", function (e) {
+      if (e.key === "Backspace") {
+        if (box.value) {
+          box.value = "";
+          e.preventDefault();
+          return;
+        }
+        if (i > 0) {
+          boxes[i - 1].value = "";
+          boxes[i - 1].focus();
+          e.preventDefault();
+        }
+      } else if (e.key === "ArrowLeft" && i > 0) {
+        boxes[i - 1].focus();
+        e.preventDefault();
+      } else if (e.key === "ArrowRight" && i < boxes.length - 1) {
+        boxes[i + 1].focus();
+        e.preventDefault();
+      } else if (e.key === "Enter") {
+        goBtn.click();
+      }
+    });
+
+    box.addEventListener("paste", function (e) {
+      var text = (e.clipboardData || window.clipboardData).getData("text") || "";
+      var digits = text.replace(/\D/g, "").slice(0, boxes.length - i);
+      if (!digits) return;
+      e.preventDefault();
+      digits.split("").forEach(function (ch, offset) {
+        boxes[i + offset].value = ch;
+      });
+      boxes[Math.min(i + digits.length, boxes.length - 1)].focus();
+    });
+  });
+
+  goBtn.addEventListener("click", function () {
+    var code = boxes.map(function (b) { return b.value; }).join("");
+    if (code === CODE) succeed();
+    else fail();
+  });
+})();
+</script>
+</body>
+</html>
