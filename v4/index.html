@@ -329,15 +329,15 @@
 
   /* —— Ficha —— */
   .app.is-ficha { justify-content: flex-start; }
-  .ficha { width: 100%; display: flex; flex-direction: column; gap: 18px; padding-bottom: 8px; }
-  .ficha-top { display: flex; justify-content: flex-end; align-items: center; }
+  .ficha { width: 100%; display: flex; flex-direction: column; gap: 18px; padding-top: 12px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  .ficha-top { display: flex; align-items: center; }
+  .ficha-top:not(:has(:not([hidden]))) { display: none; }
   .ficha-body { display: flex; flex-direction: column; gap: 18px; }
-  .salir { min-height: 44px; }
   .salir {
-    appearance: none; border: 0; font: inherit; font-weight: 800; font-size: .92rem; color: #5A3A28;
-    padding: 9px 20px; border-radius: 999px; cursor: pointer;
-    background: linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 38%), linear-gradient(180deg, #F5B89A 0%, #EFA585 100%);
-    box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 4px 0 rgba(201,146,62,.28), 0 8px 16px var(--shadow);
+    appearance: none; border: 0; font: inherit; font-family: "Nunito", sans-serif; font-weight: 800; font-size: 1rem; color: var(--text-soft);
+    width: 100%; min-height: 52px; margin-top: 10px; padding: 14px 24px; border-radius: var(--radius-pill); cursor: pointer;
+    background: linear-gradient(180deg, #FFFBF4 0%, #F7EBDB 100%);
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 6px 14px rgba(74,52,40,.08);
     transition: transform 140ms ease;
   }
   .salir:active { transform: translateY(3px) scale(.97); }
@@ -399,6 +399,36 @@
   .big-total svg { width: 46px; height: 44px; filter: drop-shadow(0 3px 3px rgba(74,52,40,.15)); }
   .big-total b { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 68px; line-height: 1; color: var(--ochre); letter-spacing: -0.02em; }
   .big-total span { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.35rem; color: var(--text); align-self: flex-end; margin-bottom: 10px; }
+  /* Cabecera A: estrella hero */
+  .cab-a { text-align: center; padding: 22px 22px 18px; }
+  .cab-a h1 { font-size: 1.5rem; }
+  .cab-a-star { position: relative; width: 168px; height: 160px; margin: 8px auto 0; }
+  .cab-a-star svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 8px 8px rgba(74,52,40,.16)); }
+  .cab-a-star b { position: absolute; left: 0; right: 0; top: 58%; transform: translateY(-50%); font-family: "Fredoka", sans-serif; font-weight: 700;
+    font-size: 58px; line-height: 1; color: #FFFBF4; text-shadow: 0 2px 0 rgba(139,105,20,.45), 0 4px 10px rgba(139,105,20,.3); }
+  .cab-a-star b.sm { font-size: 42px; }
+  .cab-a p { margin: 6px 0 0; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.2rem; }
+  /* Cabecera B: horizontal compacto */
+  .cab-b { display: flex; align-items: center; gap: 12px; padding: 18px 18px 18px 22px; }
+  .cab-b-txt { flex: 1; min-width: 0; }
+  .cab-b h1 { text-align: left; font-size: 1.45rem; line-height: 1.15; }
+  .cab-b p { margin: 4px 0 0; font-weight: 700; font-size: .9rem; color: var(--text-soft); }
+  .cab-b-badge { flex: none; display: flex; align-items: center; gap: 6px; padding: 8px 18px 8px 10px; border-radius: 999px; background: #FBE7C4;
+    box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 4px 0 rgba(201,146,62,.25), 0 8px 16px var(--shadow); }
+  .cab-b-badge svg { width: 40px; height: 38px; }
+  .cab-b-badge b { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 2.6rem; line-height: 1; color: var(--ochre); }
+  /* Cabecera C: medalla */
+  .cab-c { position: relative; margin-top: 22px; padding: 40px 22px 24px; display: flex; justify-content: center; }
+  .cab-c-name { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); white-space: nowrap; max-width: 90%; overflow: hidden; text-overflow: ellipsis;
+    padding: 10px 26px; border-radius: 999px; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.3rem; color: #5A3A28;
+    background: linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 40%), linear-gradient(180deg, #F5B89A, #EFA585);
+    box-shadow: 0 4px 0 rgba(201,146,62,.28), 0 10px 18px var(--shadow); }
+  .medal { width: 168px; height: 168px; border-radius: 50%; padding: 12px; background: conic-gradient(from 0deg, #F3CD86, #E0A84A, #F3CD86, #E0A84A, #F3CD86);
+    box-shadow: 0 10px 22px rgba(201,146,62,.3), 0 2px 0 rgba(255,255,255,.6) inset; }
+  .medal-in { width: 100%; height: 100%; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 40% 30%, #FFFFFF, #FFF6E6 70%); box-shadow: 0 4px 8px rgba(139,105,20,.18) inset; }
+  .medal-in b { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 64px; line-height: 1; color: var(--ochre); }
+  .medal-in span { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.05rem; color: var(--text); margin-top: 2px; }
   .ico { width: 22px; height: 21px; display: block; }
   /* Tablero */
   .tab { padding: 14px 10px 10px; }
@@ -777,7 +807,7 @@
     </main>
 
     <section id="done" class="view ficha" hidden>
-      <div class="ficha-top"><span class="layout-tag" id="f-tag" hidden></span><button type="button" class="salir" id="salir">Salir</button></div>
+      <div class="ficha-top"><span class="layout-tag" id="f-tag" hidden></span></div>
       <div id="f-lista" class="ficha-body">
       <div class="card head-card">
         <div class="head-star" aria-hidden="true"><svg><use href="#puffy"/></svg><div class="head-shadow"></div></div>
@@ -790,6 +820,7 @@
       <div class="dias" id="f-dias"></div>
       </div>
       <div id="f-alt" class="ficha-body" hidden></div>
+      <button type="button" class="salir" id="salir">Salir</button>
     </section>
   </div>
 
@@ -813,12 +844,22 @@
 
 <script>
 /* ===== DATOS: edita aquí ===== */
+var REG_SIETE = [
+    { fecha: "2026-08-30", asistencia: true, comportamiento: false, versiculo: false },
+    { fecha: "2026-09-06", asistencia: true, comportamiento: true,  versiculo: false },
+    { fecha: "2026-09-13", asistencia: true, comportamiento: false, versiculo: true  },
+    { fecha: "2026-09-20", asistencia: true, comportamiento: true,  versiculo: true  },
+    { fecha: "2026-09-27", asistencia: true, comportamiento: true,  versiculo: false },
+    { fecha: "2026-10-04", asistencia: true, comportamiento: true,  versiculo: true  },
+    { fecha: "2026-10-11", asistencia: true, comportamiento: false, versiculo: true  }
+  ];
 var REG_PRUEBA = [
   { fecha: "2026-09-20", asistencia: true, comportamiento: false, versiculo: false },
   { fecha: "2026-09-27", asistencia: true, comportamiento: true,  versiculo: false },
   { fecha: "2026-10-04", asistencia: true, comportamiento: true,  versiculo: true  },
   { fecha: "2026-10-11", asistencia: true, comportamiento: false, versiculo: true  }
 ];
+/* cabecera (solo tablero): "actual" (por defecto), "A", "B", "C" */
 /* layout: "lista" (por defecto), "tablero", "racha", "frasco" */
 var NINOS = {
   "1111": { nombre: "Noah Jara", layout: "tablero", registros: [
@@ -828,15 +869,10 @@ var NINOS = {
   "2222": { nombre: "Layout dos",    layout: "tablero", registros: REG_PRUEBA, etiqueta: "Layout dos" },
   "3333": { nombre: "Layout tres",   layout: "racha",   registros: REG_PRUEBA, etiqueta: "Layout tres" },
   "4444": { nombre: "Layout cuatro", layout: "frasco",  registros: REG_PRUEBA, etiqueta: "Layout cuatro" },
-  "5555": { nombre: "Prueba siete",  layout: "tablero", registros: [
-    { fecha: "2026-08-30", asistencia: true, comportamiento: false, versiculo: false },
-    { fecha: "2026-09-06", asistencia: true, comportamiento: true,  versiculo: false },
-    { fecha: "2026-09-13", asistencia: true, comportamiento: false, versiculo: true  },
-    { fecha: "2026-09-20", asistencia: true, comportamiento: true,  versiculo: true  },
-    { fecha: "2026-09-27", asistencia: true, comportamiento: true,  versiculo: false },
-    { fecha: "2026-10-04", asistencia: true, comportamiento: true,  versiculo: true  },
-    { fecha: "2026-10-11", asistencia: true, comportamiento: false, versiculo: true  }
-  ]}
+  "5555": { nombre: "Prueba siete",  layout: "tablero", registros: REG_SIETE },
+  "6666": { nombre: "Prueba siete",  layout: "tablero", cabecera: "A", etiqueta: "Cabecera A", registros: REG_SIETE },
+  "7777": { nombre: "Prueba siete",  layout: "tablero", cabecera: "B", etiqueta: "Cabecera B", registros: REG_SIETE },
+  "8888": { nombre: "Prueba siete",  layout: "tablero", cabecera: "C", etiqueta: "Cabecera C", registros: REG_SIETE }
 };
 var CATEGORIAS = [
   { key: "asistencia",     label: "Asistencia",           cls: "c-asistencia" },
@@ -914,6 +950,20 @@ var CATEGORIAS = [
   function chipsDe(r) {
     return CATEGORIAS.map(function (c) { return '<span class="cat chip ' + c.cls + (r[c.key] ? " on" : " off") + '">' + svg(r[c.key] ? "mini" : "sleepy") + c.label + "</span>"; }).join("");
   }
+  var CABECERA = {
+    actual: function (nino, t) {
+      return '<div class="card mini-head tab-head"><h1>' + esc(nino.nombre) + '</h1><div class="big-total">' + svg("puffy") + '<b>' + t.total + '</b><span>' + estrellas(t.total) + '</span></div></div>';
+    },
+    A: function (nino, t) {
+      return '<div class="card cab-a"><h1>' + esc(nino.nombre) + '</h1><div class="cab-a-star">' + svg("mini") + '<b' + (t.total > 99 ? ' class="sm"' : "") + '>' + t.total + '</b></div><p>' + (t.total === 1 ? 'estrella ganada' : 'estrellas ganadas') + '</p></div>';
+    },
+    B: function (nino, t) {
+      return '<div class="card cab-b"><div class="cab-b-txt"><h1>' + esc(nino.nombre) + '</h1><p>Total de estrellas</p></div><div class="cab-b-badge">' + svg("puffy") + '<b>' + t.total + '</b></div></div>';
+    },
+    C: function (nino, t) {
+      return '<div class="card cab-c"><div class="cab-c-name">' + esc(nino.nombre) + '</div><div class="medal"><div class="medal-in"><b>' + t.total + '</b><span>' + estrellas(t.total) + '</span></div></div></div>';
+    }
+  };
   var RENDER = {
     tablero: function (nino, regs, t) {
       var abrev = { asistencia: "Asistencia", comportamiento: "Conducta", versiculo: "Versículo" };
@@ -928,7 +978,7 @@ var CATEGORIAS = [
           h += '<div class="tab-c cat ' + c.cls + (r[c.key] ? " on" : "") + '" aria-label="' + c.label + (r[c.key] ? ": sí" : ": no") + '"><span class="well">' + (r[c.key] ? svg("puffy") : "") + "</span></div>";
         });
       });
-      return '<div class="card mini-head tab-head"><h1>' + esc(nino.nombre) + '</h1><div class="big-total">' + svg("puffy") + '<b>' + t.total + '</b><span>' + estrellas(t.total) + '</span></div></div><div class="card tab"><div class="tab-grid">' + h + "</div></div>";
+      return CABECERA[nino.cabecera || "actual"](nino, t) + '<div class="card tab"><div class="tab-grid">' + h + "</div></div>";
     },
     racha: function (nino, regs, t) {
       var u = regs[0], h = cabeza(nino, t);
