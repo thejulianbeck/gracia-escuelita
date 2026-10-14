@@ -394,6 +394,11 @@
   .mini-head { text-align: center; padding: 20px 22px; }
   .mini-head h1 { font-size: 1.6rem; line-height: 1.15; }
   .mini-head .sub b { color: var(--ochre); font-family: "Fredoka", sans-serif; }
+  .tab-head { padding: 22px 22px 18px; }
+  .big-total { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px; }
+  .big-total svg { width: 46px; height: 44px; filter: drop-shadow(0 3px 3px rgba(74,52,40,.15)); }
+  .big-total b { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 68px; line-height: 1; color: var(--ochre); letter-spacing: -0.02em; }
+  .big-total span { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.35rem; color: var(--text); align-self: flex-end; margin-bottom: 10px; }
   .ico { width: 22px; height: 21px; display: block; }
   /* Tablero */
   .tab { padding: 14px 10px 10px; }
@@ -816,13 +821,22 @@ var REG_PRUEBA = [
 ];
 /* layout: "lista" (por defecto), "tablero", "racha", "frasco" */
 var NINOS = {
-  "1111": { nombre: "Noah Jara", layout: "lista", registros: [
+  "1111": { nombre: "Noah Jara", layout: "tablero", registros: [
     { fecha: "2026-10-11", asistencia: true, comportamiento: false, versiculo: false }
   ]},
   "1234": { nombre: "Prueba uno",    layout: "lista",   registros: REG_PRUEBA },
-  "2222": { nombre: "Layout dos",    layout: "tablero", registros: REG_PRUEBA },
-  "3333": { nombre: "Layout tres",   layout: "racha",   registros: REG_PRUEBA },
-  "4444": { nombre: "Layout cuatro", layout: "frasco",  registros: REG_PRUEBA }
+  "2222": { nombre: "Layout dos",    layout: "tablero", registros: REG_PRUEBA, etiqueta: "Layout dos" },
+  "3333": { nombre: "Layout tres",   layout: "racha",   registros: REG_PRUEBA, etiqueta: "Layout tres" },
+  "4444": { nombre: "Layout cuatro", layout: "frasco",  registros: REG_PRUEBA, etiqueta: "Layout cuatro" },
+  "5555": { nombre: "Prueba siete",  layout: "tablero", registros: [
+    { fecha: "2026-08-30", asistencia: true, comportamiento: false, versiculo: false },
+    { fecha: "2026-09-06", asistencia: true, comportamiento: true,  versiculo: false },
+    { fecha: "2026-09-13", asistencia: true, comportamiento: false, versiculo: true  },
+    { fecha: "2026-09-20", asistencia: true, comportamiento: true,  versiculo: true  },
+    { fecha: "2026-09-27", asistencia: true, comportamiento: true,  versiculo: false },
+    { fecha: "2026-10-04", asistencia: true, comportamiento: true,  versiculo: true  },
+    { fecha: "2026-10-11", asistencia: true, comportamiento: false, versiculo: true  }
+  ]}
 };
 var CATEGORIAS = [
   { key: "asistencia",     label: "Asistencia",           cls: "c-asistencia" },
@@ -914,8 +928,7 @@ var CATEGORIAS = [
           h += '<div class="tab-c cat ' + c.cls + (r[c.key] ? " on" : "") + '" aria-label="' + c.label + (r[c.key] ? ": sí" : ": no") + '"><span class="well">' + (r[c.key] ? svg("puffy") : "") + "</span></div>";
         });
       });
-      return cabeza(nino, t) + '<div class="card tab"><div class="tab-grid">' + h + "</div></div>" +
-        '<p class="legend">Conducta = Buen comportamiento · Versículo = Versículo de memoria</p>';
+      return '<div class="card mini-head tab-head"><h1>' + esc(nino.nombre) + '</h1><div class="big-total">' + svg("puffy") + '<b>' + t.total + '</b><span>' + estrellas(t.total) + '</span></div></div><div class="card tab"><div class="tab-grid">' + h + "</div></div>";
     },
     racha: function (nino, regs, t) {
       var u = regs[0], h = cabeza(nino, t);
@@ -960,7 +973,7 @@ var CATEGORIAS = [
     if (RENDER[lay]) {
       var regs = nino.registros.slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; });
       alt.innerHTML = RENDER[lay](nino, regs, contar(regs));
-      alt.hidden = false; lista.hidden = true; tag.hidden = false; tag.textContent = LAYOUT_NOMBRE[lay];
+      alt.hidden = false; lista.hidden = true; tag.hidden = !nino.etiqueta; tag.textContent = nino.etiqueta || "";
       return;
     }
     alt.hidden = true; lista.hidden = false; tag.hidden = true;
