@@ -330,7 +330,9 @@
   /* —— Ficha —— */
   .app.is-ficha { justify-content: flex-start; }
   .ficha { width: 100%; display: flex; flex-direction: column; gap: 18px; padding-bottom: 8px; }
-  .ficha-top { display: flex; justify-content: flex-end; }
+  .ficha-top { display: flex; justify-content: flex-end; align-items: center; }
+  .ficha-body { display: flex; flex-direction: column; gap: 18px; }
+  .salir { min-height: 44px; }
   .salir {
     appearance: none; border: 0; font: inherit; font-weight: 800; font-size: .92rem; color: #5A3A28;
     padding: 9px 20px; border-radius: 999px; cursor: pointer;
@@ -385,6 +387,94 @@
   .chip.on { background: var(--acc-soft); color: var(--text); }
   .chip.off { background: transparent; color: rgba(122,92,74,.55); box-shadow: 0 0 0 1.5px rgba(122,92,74,.16) inset; }
   .chip.off svg { opacity: .4; }
+
+  /* —— Layouts alternativos —— */
+  .layout-tag { margin-right: auto; font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--text-soft); background: #F3E8D8; padding: 6px 12px; border-radius: 999px; }
+  .mini-head { text-align: center; padding: 20px 22px; }
+  .mini-head h1 { font-size: 1.6rem; line-height: 1.15; }
+  .mini-head .sub b { color: var(--ochre); font-family: "Fredoka", sans-serif; }
+  .ico { width: 22px; height: 21px; display: block; }
+  /* Tablero */
+  .tab { padding: 14px 10px 10px; }
+  .tab-grid { display: grid; grid-template-columns: 1fr repeat(3, 72px); align-items: center; row-gap: 6px; }
+  .tab-h { position: sticky; top: 0; z-index: 2; background: #FFFAF2; padding: 6px 0 10px; text-align: center; font-size: .72rem; font-weight: 800; line-height: 1.15; color: var(--text); }
+  .tab-h.first { text-align: left; padding-left: 10px; font-size: .8rem; color: var(--text-soft); }
+  .tab-h .cat-dot { margin: 0 auto 4px; width: 34px; height: 34px; }
+  .tab-tot { text-align: center; font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 1.15rem; padding: 6px 0; border-radius: 14px; margin: 0 6px; background: var(--acc-soft); }
+  .tab-tot.first { background: none; text-align: left; padding-left: 10px; font-family: "Nunito"; font-size: .85rem; font-weight: 800; color: var(--text-soft); }
+  .tab-row { display: contents; }
+  .tab-d { padding: 8px 0 8px 10px; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.05rem; border-top: 1.5px solid #F3E8D8; height: 60px; display: flex; flex-direction: column; justify-content: center; }
+  .tab-d small { font-family: "Nunito"; font-size: .74rem; font-weight: 700; color: var(--text-soft); }
+  .tab-c { height: 60px; display: grid; place-items: center; border-top: 1.5px solid #F3E8D8; }
+  .tab-c .well { width: 50px; height: 46px; border-radius: 16px; display: grid; place-items: center;
+    background: linear-gradient(180deg, #F3E8D8 0%, #FFF9F0 70%); box-shadow: 0 3px 5px rgba(74,52,40,.09) inset; }
+  .tab-c.on .well { background: var(--acc-soft); box-shadow: none; }
+  .tab-c svg { width: 34px; height: 32px; filter: drop-shadow(0 2px 2px rgba(74,52,40,.15)); }
+  .legend { font-size: .82rem; font-weight: 700; color: var(--text-soft); text-align: center; margin: 2px 8px 0; line-height: 1.5; }
+  /* Racha */
+  .hoy { padding: 22px; }
+  .hoy-k { font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--ochre); }
+  .hoy h2 { margin: 2px 0 14px; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.3rem; }
+  .tog { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 10px 14px; border-radius: 22px; margin-top: 10px; }
+  .tog.on { background: var(--acc-soft); }
+  .tog.off { background: linear-gradient(180deg, #F3E8D8 0%, #FFF9F0 70%); box-shadow: 0 3px 6px rgba(74,52,40,.08) inset; color: var(--text-soft); }
+  .tog svg { width: 44px; height: 42px; flex: none; filter: drop-shadow(0 3px 3px rgba(74,52,40,.15)); }
+  .tog.off svg { opacity: .6; filter: none; }
+  .tog span { flex: 1; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1rem; line-height: 1.2; }
+  .tog em { font-style: normal; font-weight: 800; font-size: .82rem; }
+  .meta { padding: 20px 22px; }
+  .meta-top { display: flex; justify-content: space-between; align-items: baseline; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.1rem; }
+  .meta-top b { font-size: 1.5rem; color: var(--ochre); }
+  .bar { position: relative; height: 26px; border-radius: 999px; margin: 12px 0 10px;
+    background: linear-gradient(180deg, #F3E8D8 0%, #FFF9F0 80%); box-shadow: 0 3px 6px rgba(74,52,40,.1) inset; }
+  .bar i { position: absolute; left: 3px; top: 3px; bottom: 3px; border-radius: 999px; min-width: 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #F3CD86, #E0A84A);
+    box-shadow: 0 2px 4px rgba(201,146,62,.35); }
+  .bar svg { position: absolute; right: -8px; top: 50%; transform: translateY(-50%); width: 40px; height: 38px; }
+  .meta p { margin: 0; color: var(--text-soft); font-weight: 700; font-size: .95rem; }
+  .racha { display: flex; align-items: center; gap: 14px; padding: 18px 22px; }
+  .racha .num { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 2.4rem; color: var(--text); line-height: 1;
+    width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: #E3ECD6; flex: none; }
+  .racha b { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.15rem; display: block; }
+  .racha span { color: var(--text-soft); font-weight: 700; font-size: .9rem; }
+  .prev { padding: 8px 18px; }
+  .prev-row { display: flex; align-items: center; justify-content: space-between; min-height: 52px; border-top: 1.5px solid #F3E8D8; }
+  .prev-row:first-child { border-top: 0; }
+  .prev-row span { font-weight: 800; font-size: .95rem; }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--acc-soft); }
+  .dots i.off { background: transparent; box-shadow: 0 0 0 1.5px rgba(122,92,74,.18) inset; }
+  .dots svg { width: 16px; height: 15px; }
+  .dots i.off svg { display: none; }
+  /* Frasco */
+  .jar-wrap { position: relative; padding: 22px 22px 18px; text-align: center; }
+  .jar { position: relative; margin: 32px auto 0; width: 230px; min-height: 200px; padding: 30px 16px 18px;
+    border-radius: 34px 34px 56px 56px; background: linear-gradient(180deg, rgba(255,255,255,.7), #FBEFDD);
+    box-shadow: 0 4px 10px rgba(74,52,40,.1) inset, 0 -2px 0 rgba(255,255,255,.9) inset, 0 10px 24px rgba(74,52,40,.08);
+    display: flex; flex-wrap: wrap-reverse; justify-content: center; align-content: flex-start; gap: 2px; }
+  .jar::before { content: ""; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); width: 150px; height: 22px; border-radius: 12px;
+    background: linear-gradient(180deg, #F5B89A, #EFA585); box-shadow: 0 4px 0 rgba(201,146,62,.28); }
+  .jar::after { content: ""; position: absolute; left: 18px; top: 30px; width: 10px; height: 70px; border-radius: 8px; background: rgba(255,255,255,.75); }
+  .jar .js { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--acc-soft); box-shadow: 0 0 0 3px var(--acc) inset; }
+  .jar .js:nth-child(3n) { transform: rotate(-12deg); } .jar .js:nth-child(3n+1) { transform: rotate(9deg); }
+  .jar .js svg { width: 38px; height: 36px; }
+  .jar.many .js { width: 34px; height: 34px; } .jar.many .js svg { width: 26px; height: 25px; }
+  .jar-num { margin-top: 14px; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.2rem; }
+  .jar-num b { color: var(--ochre); font-size: 1.6rem; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stat { border-radius: 24px; padding: 14px 6px 12px; text-align: center; background: var(--acc-soft);
+    box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 4px 0 var(--acc), 0 10px 18px var(--shadow); }
+  .stat b { display: block; font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 1.9rem; line-height: 1.1; }
+  .stat span { font-size: .76rem; font-weight: 800; line-height: 1.2; display: block; }
+  .carousel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -24px; padding: 4px 24px 22px; scrollbar-width: none; }
+  .carousel::-webkit-scrollbar { display: none; }
+  .slide { flex: 0 0 78%; scroll-snap-align: center; padding: 18px; border-radius: 28px; }
+  .slide .dia-fecha { font-size: 1.05rem; }
+  .slide-stars { display: flex; gap: 4px; margin: 12px 0 10px; min-height: 40px; }
+  .slide-stars svg { width: 40px; height: 38px; filter: drop-shadow(0 3px 3px rgba(74,52,40,.14)); }
+  .slide .chips { margin-top: 0; }
+  .hint { text-align: center; font-size: .82rem; font-weight: 700; color: var(--text-soft); margin-top: -14px; }
 
   /* —— Sheet —— */
   .scrim {
@@ -682,7 +772,8 @@
     </main>
 
     <section id="done" class="view ficha" hidden>
-      <div class="ficha-top"><button type="button" class="salir" id="salir">Salir</button></div>
+      <div class="ficha-top"><span class="layout-tag" id="f-tag" hidden></span><button type="button" class="salir" id="salir">Salir</button></div>
+      <div id="f-lista" class="ficha-body">
       <div class="card head-card">
         <div class="head-star" aria-hidden="true"><svg><use href="#puffy"/></svg><div class="head-shadow"></div></div>
         <h1 id="f-nombre"></h1>
@@ -692,6 +783,8 @@
       <div id="f-cats" style="display:flex;flex-direction:column;gap:14px"></div>
       <h2 class="section-title">Por domingo</h2>
       <div class="dias" id="f-dias"></div>
+      </div>
+      <div id="f-alt" class="ficha-body" hidden></div>
     </section>
   </div>
 
@@ -715,16 +808,21 @@
 
 <script>
 /* ===== DATOS: edita aquí ===== */
+var REG_PRUEBA = [
+  { fecha: "2026-09-20", asistencia: true, comportamiento: false, versiculo: false },
+  { fecha: "2026-09-27", asistencia: true, comportamiento: true,  versiculo: false },
+  { fecha: "2026-10-04", asistencia: true, comportamiento: true,  versiculo: true  },
+  { fecha: "2026-10-11", asistencia: true, comportamiento: false, versiculo: true  }
+];
+/* layout: "lista" (por defecto), "tablero", "racha", "frasco" */
 var NINOS = {
-  "1111": { nombre: "Noah Jara", registros: [
+  "1111": { nombre: "Noah Jara", layout: "lista", registros: [
     { fecha: "2026-10-11", asistencia: true, comportamiento: false, versiculo: false }
   ]},
-  "1234": { nombre: "Prueba uno", registros: [
-    { fecha: "2026-09-20", asistencia: true, comportamiento: false, versiculo: false },
-    { fecha: "2026-09-27", asistencia: true, comportamiento: true,  versiculo: false },
-    { fecha: "2026-10-04", asistencia: true, comportamiento: true,  versiculo: true  },
-    { fecha: "2026-10-11", asistencia: true, comportamiento: false, versiculo: true  }
-  ]}
+  "1234": { nombre: "Prueba uno",    layout: "lista",   registros: REG_PRUEBA },
+  "2222": { nombre: "Layout dos",    layout: "tablero", registros: REG_PRUEBA },
+  "3333": { nombre: "Layout tres",   layout: "racha",   registros: REG_PRUEBA },
+  "4444": { nombre: "Layout cuatro", layout: "frasco",  registros: REG_PRUEBA }
 };
 var CATEGORIAS = [
   { key: "asistencia",     label: "Asistencia",           cls: "c-asistencia" },
@@ -788,7 +886,87 @@ var CATEGORIAS = [
   function svg(id, extra) { return '<svg aria-hidden="true"' + (extra || "") + '><use href="#' + id + '"/></svg>'; }
   function esc(t) { var d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
   function estrellas(n) { return n === 1 ? "estrella" : "estrellas"; }
+  var LAYOUT_NOMBRE = { tablero: "Layout dos", racha: "Layout tres", frasco: "Layout cuatro" };
+  var fmtCorto = new Intl.DateTimeFormat("es", { day: "numeric", month: "short", timeZone: "UTC" });
+  function corto(iso) { return fmtCorto.format(new Date(iso + "T12:00:00Z")).replace(".", ""); }
+  function contar(regs) {
+    var t = { total: 0 };
+    CATEGORIAS.forEach(function (c) { t[c.key] = regs.filter(function (r) { return r[c.key]; }).length; t.total += t[c.key]; });
+    return t;
+  }
+  function cabeza(nino, t) {
+    return '<div class="card mini-head"><h1>' + esc(nino.nombre) + '</h1><p class="sub">Historial de estrellas · <b>' + t.total + "</b> " + estrellas(t.total) + "</p></div>";
+  }
+  function chipsDe(r) {
+    return CATEGORIAS.map(function (c) { return '<span class="cat chip ' + c.cls + (r[c.key] ? " on" : " off") + '">' + svg(r[c.key] ? "mini" : "sleepy") + c.label + "</span>"; }).join("");
+  }
+  var RENDER = {
+    tablero: function (nino, regs, t) {
+      var abrev = { asistencia: "Asistencia", comportamiento: "Conducta", versiculo: "Versículo" };
+      var h = '<div class="tab-h first">Domingo</div>';
+      CATEGORIAS.forEach(function (c) { h += '<div class="tab-h cat ' + c.cls + '"><span class="cat-dot">' + svg("mini", ' class="ico"') + "</span>" + abrev[c.key] + "</div>"; });
+      h += '<div class="tab-tot first">Total</div>';
+      CATEGORIAS.forEach(function (c) { h += '<div class="tab-tot cat ' + c.cls + '">' + t[c.key] + "</div>"; });
+      regs.forEach(function (r) {
+        var k = CATEGORIAS.filter(function (c) { return r[c.key]; }).length;
+        h += '<div class="tab-d">' + corto(r.fecha) + "<small>" + k + " " + estrellas(k) + "</small></div>";
+        CATEGORIAS.forEach(function (c) {
+          h += '<div class="tab-c cat ' + c.cls + (r[c.key] ? " on" : "") + '" aria-label="' + c.label + (r[c.key] ? ": sí" : ": no") + '"><span class="well">' + (r[c.key] ? svg("puffy") : "") + "</span></div>";
+        });
+      });
+      return cabeza(nino, t) + '<div class="card tab"><div class="tab-grid">' + h + "</div></div>" +
+        '<p class="legend">Conducta = Buen comportamiento · Versículo = Versículo de memoria</p>';
+    },
+    racha: function (nino, regs, t) {
+      var u = regs[0], h = cabeza(nino, t);
+      if (u) {
+        h += '<div class="card hoy"><div class="hoy-k">Este domingo</div><h2>' + fecha(u.fecha) + "</h2>";
+        CATEGORIAS.forEach(function (c) {
+          h += '<div class="tog cat ' + c.cls + (u[c.key] ? " on" : " off") + '">' + svg(u[c.key] ? "puffy" : "sleepy") + "<span>" + c.label + "</span><em>" + (u[c.key] ? "¡Ganada!" : "La próxima") + "</em></div>";
+        });
+        h += "</div>";
+      }
+      var meta = Math.max(10, Math.ceil((t.total + 1) / 10) * 10), falta = meta - t.total;
+      h += '<div class="card meta"><div class="meta-top"><span>Próximo premio</span><span><b>' + t.total + "</b> / " + meta + '</span></div><div class="bar"><i style="width:calc(' + (t.total / meta * 100) + '% - 6px)"></i>' + svg("puffy") + "</div><p>¡Faltan " + falta + " " + estrellas(falta) + " para llegar a " + meta + "!</p></div>";
+      var racha = 0;
+      for (var i = 0; i < regs.length && regs[i].asistencia; i++) racha++;
+      h += '<div class="card racha"><span class="num">' + racha + "</span><div><b>" + (racha === 1 ? "1 domingo seguido" : racha + " domingos seguidos") + "</b><span>" + (racha > 1 ? "¡Qué constancia!" : "¡Buen comienzo!") + "</span></div></div>";
+      if (regs.length > 1) {
+        h += '<h2 class="section-title">Domingos anteriores</h2><div class="card prev">';
+        regs.slice(1).forEach(function (r) {
+          h += '<div class="prev-row"><span>' + corto(r.fecha) + '</span><span class="dots">' + CATEGORIAS.map(function (c) { return '<i class="cat ' + c.cls + (r[c.key] ? "" : " off") + '" title="' + c.label + '">' + svg("mini") + "</i>"; }).join("") + "</span></div>";
+        });
+        h += "</div>";
+      }
+      return h;
+    },
+    frasco: function (nino, regs, t) {
+      var st = "";
+      regs.slice().reverse().forEach(function (r) { CATEGORIAS.forEach(function (c) { if (r[c.key]) st += '<span class="js cat ' + c.cls + '">' + svg("mini") + "</span>"; }); });
+      var h = '<div class="card jar-wrap"><h1>' + esc(nino.nombre) + '</h1><div class="jar' + (t.total > 15 ? " many" : "") + '" aria-label="' + t.total + " " + estrellas(t.total) + '">' + st + '</div><div class="jar-num"><b>' + t.total + "</b> " + estrellas(t.total) + " en su frasco</div></div>";
+      h += '<div class="stats">' + CATEGORIAS.map(function (c) { return '<div class="stat cat ' + c.cls + '"><b>' + t[c.key] + "</b><span>" + c.label + "</span></div>"; }).join("") + "</div>";
+      h += '<h2 class="section-title">Por domingo</h2><div class="carousel">';
+      regs.forEach(function (r) {
+        var k = CATEGORIAS.filter(function (c) { return r[c.key]; }).length, ss = "";
+        for (var i = 0; i < k; i++) ss += svg("puffy");
+        h += '<div class="card slide"><div class="dia-fecha">' + fecha(r.fecha) + '</div><div class="slide-stars">' + ss + '</div><div class="chips">' + chipsDe(r) + "</div></div>";
+      });
+      return h + '</div>' + (regs.length > 1 ? '<p class="hint">Desliza para ver más domingos →</p>' : "");
+    }
+  };
+
   function render(nino) {
+    var lay = nino.layout || "lista", alt = document.getElementById("f-alt"), lista = document.getElementById("f-lista"), tag = document.getElementById("f-tag");
+    if (RENDER[lay]) {
+      var regs = nino.registros.slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; });
+      alt.innerHTML = RENDER[lay](nino, regs, contar(regs));
+      alt.hidden = false; lista.hidden = true; tag.hidden = false; tag.textContent = LAYOUT_NOMBRE[lay];
+      return;
+    }
+    alt.hidden = true; lista.hidden = false; tag.hidden = true;
+    renderLista(nino);
+  }
+  function renderLista(nino) {
     var regs = nino.registros.slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; });
     var total = 0, cats = "";
     CATEGORIAS.forEach(function (c) {
