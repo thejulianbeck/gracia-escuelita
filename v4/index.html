@@ -1008,14 +1008,15 @@ var CATEGORIAS = [
   var RENDER = {
     tablero: function (nino, regs, t) {
       var abrev = { asistencia: "Asistencia", comportamiento: "Conducta", versiculo: "Versículo" };
-      var h = '<div class="tab-h first">Domingo</div>';
-      CATEGORIAS.forEach(function (c) { h += '<div class="tab-h cat ' + c.cls + '"><span class="cat-dot">' + svg("mini", ' class="ico"') + "</span>" + abrev[c.key] + "</div>"; });
+      var h = '';
       var t0 = t;
       var saldo = nino.saldoInicial;
       if (saldo && saldo.estrellas) {
         h += '<div class="tab-saldo"><span class="tab-saldo-ico">' + svg("puffy") + '</span><span><b>Hasta el ' + corto(saldo.hasta) + '</b><small>' + saldo.estrellas + " " + (saldo.estrellas === 1 ? "estrella acumulada" : "estrellas acumuladas") + '</small></span><em>' + saldo.estrellas + '</em></div>';
         t = Object.assign({}, t, { total: t.total + saldo.estrellas });
       }
+      h += '<div class="tab-h first">Domingo</div>';
+      CATEGORIAS.forEach(function (c) { h += '<div class="tab-h cat ' + c.cls + '"><span class="cat-dot">' + svg("mini", ' class="ico"') + "</span>" + abrev[c.key] + "</div>"; });
       h += '<div class="tab-tot first">Total</div>';
       CATEGORIAS.forEach(function (c) { h += '<div class="tab-tot cat ' + c.cls + '">' + t0[c.key] + "</div>"; });
       regs.forEach(function (r) {
