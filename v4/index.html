@@ -447,6 +447,13 @@
   .anillo .sp1 { top: -4px; right: 6px; } .anillo .sp2 { bottom: 10px; left: -8px; width: 14px; height: 14px; animation-delay: .8s; }
   .anillo .sp3 { top: 30px; left: -2px; width: 11px; height: 11px; animation-delay: 1.5s; }
   @media (prefers-reduced-motion: reduce) { .anillo .arc, .anillo .arc-hl { transition: none; } .anillo .sp { animation: none; } }
+  .tab-saldo { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin: 8px 4px 2px; padding: 12px 16px 12px 12px; border-radius: 20px;
+    background: repeating-linear-gradient(135deg, #FBE7C4 0 10px, #FCEDD2 10px 20px); box-shadow: 0 1px 0 rgba(255,255,255,.7) inset; }
+  .tab-saldo-ico svg { width: 40px; height: 38px; display: block; filter: drop-shadow(0 2px 2px rgba(74,52,40,.15)); }
+  .tab-saldo span:nth-child(2) { flex: 1; }
+  .tab-saldo b { display: block; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.05rem; }
+  .tab-saldo small { font-size: .82rem; font-weight: 700; color: var(--text-soft); }
+  .tab-saldo em { font-style: normal; font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 1.6rem; color: var(--ochre); }
   .ico { width: 22px; height: 21px; display: block; }
   /* Tablero */
   .tab { padding: 14px 10px 10px; }
@@ -882,7 +889,7 @@ var META = 50;
 /* cabecera (solo tablero): "actual" (por defecto), "A", "B", "C" */
 /* layout: "lista" (por defecto), "tablero", "racha", "frasco" */
 var NINOS = {
-  "1111": { nombre: "Noah Jara", layout: "tablero", registros: [
+  "2612": { nombre: "Noah Jara", layout: "tablero", registros: [
     { fecha: "2026-10-11", asistencia: true, comportamiento: true, versiculo: false },
     { fecha: "2026-10-18", asistencia: true, comportamiento: true, versiculo: false }
   ]},
@@ -890,6 +897,8 @@ var NINOS = {
   "2222": { nombre: "Layout dos",    layout: "tablero", registros: REG_PRUEBA, etiqueta: "Layout dos" },
   "3333": { nombre: "Layout tres",   layout: "racha",   registros: REG_PRUEBA, etiqueta: "Layout tres" },
   "4444": { nombre: "Layout cuatro", layout: "frasco",  registros: REG_PRUEBA, etiqueta: "Layout cuatro" },
+  /* saldoInicial: estrellas acumuladas antes de llevar registro por domingo (sin desglose) */
+  "1703": { nombre: "Charlie",       layout: "tablero", saldoInicial: { estrellas: 36, hasta: "2026-10-11" }, registros: [] },
   "5555": { nombre: "Prueba siete",  layout: "tablero", registros: REG_SIETE },
   "6666": { nombre: "Prueba siete",  layout: "tablero", cabecera: "A", etiqueta: "Cabecera A", registros: REG_SIETE },
   "7777": { nombre: "Prueba siete",  layout: "tablero", cabecera: "B", etiqueta: "Cabecera B", registros: REG_SIETE },
@@ -1000,7 +1009,7 @@ var CATEGORIAS = [
       var abrev = { asistencia: "Asistencia", comportamiento: "Conducta", versiculo: "Versículo" };
       var h = '<div class="tab-h first">Domingo</div>';
       CATEGORIAS.forEach(function (c) { h += '<div class="tab-h cat ' + c.cls + '"><span class="cat-dot">' + svg("mini", ' class="ico"') + "</span>" + abrev[c.key] + "</div>"; });
-      h += '<div class="tab-tot first">Total</div>';
+      h += '<div class="tab-tot first">' + (nino.saldoInicial ? "Desde " + corto(new Date(Date.parse(nino.saldoInicial.hasta + "T12:00:00Z") + 7 * 864e5).toISOString().slice(0, 10)) : "Total") + '</div>';
       CATEGORIAS.forEach(function (c) { h += '<div class="tab-tot cat ' + c.cls + '">' + t[c.key] + "</div>"; });
       regs.forEach(function (r) {
         var k = CATEGORIAS.filter(function (c) { return r[c.key]; }).length;
@@ -1009,6 +1018,11 @@ var CATEGORIAS = [
           h += '<div class="tab-c cat ' + c.cls + (r[c.key] ? " on" : "") + '" aria-label="' + c.label + (r[c.key] ? ": sí" : ": no") + '"><span class="well">' + (r[c.key] ? svg("puffy") : "") + "</span></div>";
         });
       });
+      var saldo = nino.saldoInicial;
+      if (saldo && saldo.estrellas) {
+        h += '<div class="tab-saldo"><span class="tab-saldo-ico">' + svg("puffy") + '</span><span><b>Hasta el ' + corto(saldo.hasta) + '</b><small>' + saldo.estrellas + " " + (saldo.estrellas === 1 ? "estrella acumulada" : "estrellas acumuladas") + '</small></span><em>' + saldo.estrellas + '</em></div>';
+        t = Object.assign({}, t, { total: t.total + saldo.estrellas });
+      }
       return CABECERA[nino.cabecera || "actual"](nino, t) + '<div class="card tab"><div class="tab-grid">' + h + "</div></div>";
     },
     racha: function (nino, regs, t) {
