@@ -429,6 +429,24 @@
     background: radial-gradient(circle at 40% 30%, #FFFFFF, #FFF6E6 70%); box-shadow: 0 4px 8px rgba(139,105,20,.18) inset; }
   .medal-in b { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 64px; line-height: 1; color: var(--ochre); }
   .medal-in span { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.05rem; color: var(--text); margin-top: 2px; }
+  /* Anillo de progreso (cabecera actual) */
+  .anillo { position: relative; width: 196px; height: 196px; margin: 12px auto 0; }
+  .anillo svg { width: 100%; height: 100%; display: block; transform: rotate(-90deg); overflow: visible; }
+  .anillo .track { fill: none; stroke: #EFE2CF; stroke-width: 20; }
+  .anillo .track-in { fill: none; stroke: rgba(74,52,40,.07); stroke-width: 4; }
+  .anillo .arc { fill: none; stroke: url(#ringG); stroke-width: 20; stroke-linecap: round;
+    filter: drop-shadow(0 2px 2px rgba(139,105,20,.25)); transition: stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1); }
+  .anillo .arc-hl { fill: none; stroke: rgba(255,255,255,.5); stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1); }
+  .anillo-c { position: absolute; inset: 40px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 40% 30%, #FFFFFF, #FFF6E6 75%); box-shadow: 0 6px 14px rgba(74,52,40,.08), 0 1px 0 rgba(255,255,255,.9) inset; }
+  .anillo-c b { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 58px; line-height: .95; color: var(--ochre); letter-spacing: -0.02em; }
+  .anillo-c span { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.05rem; color: var(--text-soft); }
+  .anillo-pie { margin: 10px 0 0; font-weight: 700; color: var(--text-soft); font-size: .95rem; }
+  .anillo .sp { position: absolute; width: 18px; height: 18px; animation: twinkle 2.4s ease-in-out infinite; }
+  .anillo .sp svg { transform: none; }
+  .anillo .sp1 { top: -4px; right: 6px; } .anillo .sp2 { bottom: 10px; left: -8px; width: 14px; height: 14px; animation-delay: .8s; }
+  .anillo .sp3 { top: 30px; left: -2px; width: 11px; height: 11px; animation-delay: 1.5s; }
+  @media (prefers-reduced-motion: reduce) { .anillo .arc, .anillo .arc-hl { transition: none; } .anillo .sp { animation: none; } }
   .ico { width: 22px; height: 21px; display: block; }
   /* Tablero */
   .tab { padding: 14px 10px 10px; }
@@ -859,6 +877,8 @@ var REG_PRUEBA = [
   { fecha: "2026-10-04", asistencia: true, comportamiento: true,  versiculo: true  },
   { fecha: "2026-10-11", asistencia: true, comportamiento: false, versiculo: true  }
 ];
+/* Meta de estrellas para el anillo de progreso */
+var META = 50;
 /* cabecera (solo tablero): "actual" (por defecto), "A", "B", "C" */
 /* layout: "lista" (por defecto), "tablero", "racha", "frasco" */
 var NINOS = {
@@ -953,7 +973,17 @@ var CATEGORIAS = [
   }
   var CABECERA = {
     actual: function (nino, t) {
-      return '<div class="card mini-head tab-head"><h1>' + esc(nino.nombre) + '</h1><div class="big-total">' + svg("puffy") + '<b>' + t.total + '</b><span>' + estrellas(t.total) + '</span></div></div>';
+      var C = 2 * Math.PI * 72, pct = Math.min(t.total / META, 1), full = t.total >= META;
+      var spark = '<svg viewBox="0 0 24 24"><path d="M12 2 L13.5 9.5 L21 11 L13.5 12.5 L12 20 L10.5 12.5 L3 11 L10.5 9.5 Z" fill="#F3CD86" stroke="#F3CD86" stroke-width="3" stroke-linejoin="round"/></svg>';
+      return '<div class="card mini-head tab-head"><h1>' + esc(nino.nombre) + '</h1>' +
+        '<div class="anillo' + (full ? " lleno" : "") + '" role="img" aria-label="' + t.total + " de " + META + ' estrellas">' +
+        '<svg viewBox="0 0 180 180"><defs><linearGradient id="ringG" gradientUnits="userSpaceOnUse" x1="180" y1="0" x2="0" y2="180"><stop offset="0%" stop-color="#F3CD86"/><stop offset="100%" stop-color="#C9923E"/></linearGradient></defs>' +
+        '<circle class="track" cx="90" cy="90" r="72"/><circle class="track-in" cx="90" cy="90" r="64"/>' +
+        '<circle class="arc" cx="90" cy="90" r="72" stroke-dasharray="' + C.toFixed(2) + '" stroke-dashoffset="' + C.toFixed(2) + '" data-off="' + (C * (1 - pct)).toFixed(2) + '"/>' +
+        '<circle class="arc-hl" cx="90" cy="90" r="72" transform="translate(-2.5 0)" stroke-dasharray="' + C.toFixed(2) + '" stroke-dashoffset="' + C.toFixed(2) + '" data-off="' + (C * (1 - pct)).toFixed(2) + '"/></svg>' +
+        '<div class="anillo-c"><b>' + t.total + '</b><span>de ' + META + '</span></div>' +
+        (full ? '<i class="sp sp1">' + spark + '</i><i class="sp sp2">' + spark + '</i><i class="sp sp3">' + spark + '</i>' : "") +
+        '</div><p class="anillo-pie">' + (full ? "¡Meta cumplida! " + t.total + " " + estrellas(t.total) : t.total + " " + estrellas(t.total) + " · meta " + META) + '</p></div>';
     },
     A: function (nino, t) {
       return '<div class="card cab-a"><h1>' + esc(nino.nombre) + '</h1><div class="cab-a-star">' + svg("mini") + '<b' + (t.total > 99 ? ' class="sm"' : "") + '>' + t.total + '</b></div><p>' + (t.total === 1 ? 'estrella ganada' : 'estrellas ganadas') + '</p></div>';
@@ -1024,7 +1054,11 @@ var CATEGORIAS = [
     if (RENDER[lay]) {
       var regs = nino.registros.slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; });
       alt.innerHTML = RENDER[lay](nino, regs, contar(regs));
-      alt.hidden = false; lista.hidden = true; tag.hidden = !nino.etiqueta; tag.textContent = nino.etiqueta || "";
+      alt.hidden = false; lista.hidden = true;
+      var arcs = alt.querySelectorAll(".anillo [data-off]");
+      if (arcs.length) requestAnimationFrame(function () { requestAnimationFrame(function () {
+        Array.prototype.forEach.call(arcs, function (a) { a.style.strokeDashoffset = a.getAttribute("data-off"); });
+      }); }); tag.hidden = !nino.etiqueta; tag.textContent = nino.etiqueta || "";
       return;
     }
     alt.hidden = true; lista.hidden = false; tag.hidden = true;
