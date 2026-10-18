@@ -898,7 +898,7 @@ var NINOS = {
   "3333": { nombre: "Layout tres",   layout: "racha",   registros: REG_PRUEBA, etiqueta: "Layout tres" },
   "4444": { nombre: "Layout cuatro", layout: "frasco",  registros: REG_PRUEBA, etiqueta: "Layout cuatro" },
   /* saldoInicial: estrellas acumuladas antes de llevar registro por domingo (sin desglose) */
-  "1703": { nombre: "Charlie",       layout: "tablero", saldoInicial: { estrellas: 36, hasta: "2026-10-11" }, registros: [] },
+  "1703": { nombre: "Charlie",       layout: "tablero", saldoInicial: { estrellas: 36, hasta: "2026-10-11" }, registros: [{ fecha: "2026-10-18" }] },
   "5555": { nombre: "Prueba siete",  layout: "tablero", registros: REG_SIETE },
   "6666": { nombre: "Prueba siete",  layout: "tablero", cabecera: "A", etiqueta: "Cabecera A", registros: REG_SIETE },
   "7777": { nombre: "Prueba siete",  layout: "tablero", cabecera: "B", etiqueta: "Cabecera B", registros: REG_SIETE },
@@ -1009,8 +1009,14 @@ var CATEGORIAS = [
       var abrev = { asistencia: "Asistencia", comportamiento: "Conducta", versiculo: "Versículo" };
       var h = '<div class="tab-h first">Domingo</div>';
       CATEGORIAS.forEach(function (c) { h += '<div class="tab-h cat ' + c.cls + '"><span class="cat-dot">' + svg("mini", ' class="ico"') + "</span>" + abrev[c.key] + "</div>"; });
-      h += '<div class="tab-tot first">' + (nino.saldoInicial ? "Desde " + corto(new Date(Date.parse(nino.saldoInicial.hasta + "T12:00:00Z") + 7 * 864e5).toISOString().slice(0, 10)) : "Total") + '</div>';
-      CATEGORIAS.forEach(function (c) { h += '<div class="tab-tot cat ' + c.cls + '">' + t[c.key] + "</div>"; });
+      var t0 = t;
+      var saldo = nino.saldoInicial;
+      if (saldo && saldo.estrellas) {
+        h += '<div class="tab-saldo"><span class="tab-saldo-ico">' + svg("puffy") + '</span><span><b>Hasta el ' + corto(saldo.hasta) + '</b><small>' + saldo.estrellas + " " + (saldo.estrellas === 1 ? "estrella acumulada" : "estrellas acumuladas") + '</small></span><em>' + saldo.estrellas + '</em></div>';
+        t = Object.assign({}, t, { total: t.total + saldo.estrellas });
+      }
+      h += '<div class="tab-tot first">Total</div>';
+      CATEGORIAS.forEach(function (c) { h += '<div class="tab-tot cat ' + c.cls + '">' + t0[c.key] + "</div>"; });
       regs.forEach(function (r) {
         var k = CATEGORIAS.filter(function (c) { return r[c.key]; }).length;
         h += '<div class="tab-d">' + corto(r.fecha) + "<small>" + k + " " + estrellas(k) + "</small></div>";
@@ -1018,11 +1024,6 @@ var CATEGORIAS = [
           h += '<div class="tab-c cat ' + c.cls + (r[c.key] ? " on" : "") + '" aria-label="' + c.label + (r[c.key] ? ": sí" : ": no") + '"><span class="well">' + (r[c.key] ? svg("puffy") : "") + "</span></div>";
         });
       });
-      var saldo = nino.saldoInicial;
-      if (saldo && saldo.estrellas) {
-        h += '<div class="tab-saldo"><span class="tab-saldo-ico">' + svg("puffy") + '</span><span><b>Hasta el ' + corto(saldo.hasta) + '</b><small>' + saldo.estrellas + " " + (saldo.estrellas === 1 ? "estrella acumulada" : "estrellas acumuladas") + '</small></span><em>' + saldo.estrellas + '</em></div>';
-        t = Object.assign({}, t, { total: t.total + saldo.estrellas });
-      }
       return CABECERA[nino.cabecera || "actual"](nino, t) + '<div class="card tab"><div class="tab-grid">' + h + "</div></div>";
     },
     racha: function (nino, regs, t) {
