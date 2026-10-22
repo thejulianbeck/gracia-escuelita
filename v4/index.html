@@ -342,6 +342,34 @@
   }
   .salir:active { transform: translateY(3px) scale(.97); }
   .salir:focus-visible { outline: 3px solid var(--peach); outline-offset: 3px; }
+  /* —— Modo maestro —— */
+  .maestro { width: 100%; display: flex; flex-direction: column; gap: 14px; padding-top: 12px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  .m-head { text-align: center; padding: 6px 4px 2px; }
+  .m-head .m-tag { display: inline-block; font-size: .74rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--ochre); background: #FCEBCB; padding: 5px 12px; border-radius: 999px; }
+  .m-head h1 { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.9rem; margin: 8px 0 2px; }
+  .m-head p { margin: 0; color: var(--text-soft); font-weight: 700; font-size: .95rem; }
+  .m-search { position: sticky; top: 8px; z-index: 5; display: flex; align-items: center; gap: 10px; padding: 0 16px; min-height: 52px; border-radius: var(--radius-pill); background: var(--cream); box-shadow: 0 6px 16px var(--shadow), 0 0 0 2px #F3E3CC inset; }
+  .m-search svg { width: 20px; height: 20px; flex: none; color: var(--text-soft); }
+  .m-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-weight: 700; font-size: 16px; color: var(--text); }
+  .m-search input::placeholder { color: #B79C88; }
+  .m-list { display: flex; flex-direction: column; gap: 10px; }
+  .m-row { display: flex; align-items: center; gap: 12px; padding: 12px 12px 12px 12px; border-radius: 24px; background: var(--cream-card); box-shadow: 0 6px 14px rgba(74,52,40,.08), 0 1px 0 rgba(255,255,255,.8) inset; }
+  .m-ring { position: relative; width: 52px; height: 52px; flex: none; }
+  .m-ring svg { width: 52px; height: 52px; transform: rotate(-90deg); display: block; }
+  .m-ring b { position: absolute; inset: 0; display: grid; place-items: center; font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--ochre); }
+  .m-row.lleno .m-ring b { color: #8BA36B; }
+  .m-info { flex: 1; min-width: 0; }
+  .m-info strong { display: block; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.08rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .m-info small { display: block; margin-top: 2px; font-size: .8rem; font-weight: 700; color: var(--text-soft); }
+  .m-code { display: inline-flex; align-items: baseline; gap: 6px; margin-top: 6px; padding: 4px 11px; border-radius: 999px; background: #FCEBCB; font-size: .78rem; font-weight: 800; color: var(--text-soft); }
+  .m-code b { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: 1.12rem; letter-spacing: .12em; color: var(--text); }
+  .m-info code { font-family: inherit; font-weight: 800; color: #B79C88; letter-spacing: .05em; }
+  .m-ver { appearance: none; border: 0; flex: none; font: inherit; font-weight: 800; font-size: .88rem; color: #fff; padding: 10px 14px; border-radius: 999px; cursor: pointer; background: linear-gradient(180deg, var(--peach) 0%, var(--peach-deep) 100%); box-shadow: 0 4px 10px rgba(239,165,133,.4); transition: transform 140ms ease; }
+  .m-ver:active { transform: scale(.94); }
+  .m-empty { text-align: center; color: var(--text-soft); font-weight: 700; padding: 24px 8px; }
+  .volver { appearance: none; border: 0; font: inherit; font-weight: 800; font-size: 1rem; color: #fff; width: 100%; min-height: 52px; margin-top: 10px; padding: 14px 24px; border-radius: var(--radius-pill); cursor: pointer; background: linear-gradient(180deg, var(--peach) 0%, var(--peach-deep) 100%); box-shadow: 0 6px 14px rgba(239,165,133,.4); transition: transform 140ms ease; }
+  .volver:active { transform: translateY(3px) scale(.97); }
+  .volver-top { align-self: flex-start; appearance: none; border: 0; font: inherit; font-weight: 800; font-size: .9rem; color: var(--text-soft); background: var(--cream-card); padding: 8px 14px; border-radius: 999px; box-shadow: 0 4px 10px rgba(74,52,40,.08); cursor: pointer; }
   .card {
     background: linear-gradient(180deg, #FFFBF4 0%, #FFF8EE 100%);
     border-radius: var(--radius-card);
@@ -831,8 +859,15 @@
       </div>
     </main>
 
+    <section id="maestro" class="view maestro" hidden>
+      <div class="m-head"><span class="m-tag">Escuelita Gracia</span><h1>Modo maestro</h1><p id="m-count"></p></div>
+      <label class="m-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="m-q" type="search" placeholder="Buscar por nombre o código" autocomplete="off" aria-label="Buscar por nombre"></label>
+      <div class="m-list" id="m-list"></div>
+      <button type="button" class="salir" id="m-salir">Salir</button>
+    </section>
+
     <section id="done" class="view ficha" hidden>
-      <div class="ficha-top"><span class="layout-tag" id="f-tag" hidden></span></div>
+      <div class="ficha-top"><button type="button" class="volver-top" id="volver-top" hidden>← Lista</button><span class="layout-tag" id="f-tag" hidden></span></div>
       <div id="f-lista" class="ficha-body">
       <div class="card head-card">
         <div class="head-star" aria-hidden="true"><svg><use href="#puffy"/></svg><div class="head-shadow"></div></div>
@@ -845,6 +880,7 @@
       <div class="dias" id="f-dias"></div>
       </div>
       <div id="f-alt" class="ficha-body" hidden></div>
+      <button type="button" class="volver" id="volver" hidden>← Volver a la lista</button>
       <button type="button" class="salir" id="salir">Salir</button>
     </section>
   </div>
@@ -930,7 +966,6 @@ var NINOS = {
   ]},
   "5555": { nombre: "Prueba siete",  layout: "tablero", registros: REG_SIETE },
   "6666": { nombre: "Prueba siete",  layout: "tablero", cabecera: "A", etiqueta: "Cabecera A", registros: REG_SIETE },
-  "7777": { nombre: "Prueba siete",  layout: "tablero", cabecera: "B", etiqueta: "Cabecera B", registros: REG_SIETE },
   "8888": { nombre: "Prueba siete",  layout: "tablero", cabecera: "C", etiqueta: "Cabecera C", registros: REG_SIETE }
 };
 var CATEGORIAS = [
@@ -1134,7 +1169,50 @@ var CATEGORIAS = [
     document.getElementById("f-dias").innerHTML = dias || '<div class="card empty">Aún no hay domingos registrados.</div>';
   }
 
+  var CODIGO_MAESTRO = "7777", PRUEBAS = ["1234","2222","3333","4444","5555","6666","8888"];
+  var maestro = document.getElementById("maestro"), enMaestro = false, mScroll = 0;
+  function totalDe(n) { var t = contar(n.registros || []).total; return t + ((n.saldoInicial && n.saldoInicial.estrellas) || 0); }
+  function esReal(code) { var n = NINOS[code]; return PRUEBAS.indexOf(code) < 0 && !n.etiqueta && !/prueba|layout|opci[oó]n/i.test(n.nombre); }
+  function sinAcento(t) { return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+  function renderMaestro() {
+    var q = sinAcento(document.getElementById("m-q").value.trim());
+    var all = Object.keys(NINOS).filter(esReal).sort(function (a, b) { return NINOS[a].nombre.localeCompare(NINOS[b].nombre, "es"); });
+    var list = all.filter(function (c) { return !q || sinAcento(NINOS[c].nombre).indexOf(q) >= 0 || c.indexOf(q) >= 0; });
+    var C = 2 * Math.PI * 22;
+    document.getElementById("m-count").textContent = (q ? list.length + " de " : "") + all.length + " niños";
+    document.getElementById("m-list").innerHTML = list.map(function (c) {
+      var n = NINOS[c], t = totalDe(n), pct = Math.min(t / META, 1), full = t >= META;
+      return '<div class="m-row' + (full ? " lleno" : "") + '"><div class="m-ring" role="img" aria-label="' + t + " de " + META + '"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" fill="none" stroke="#F3E3CC" stroke-width="6"/><circle cx="26" cy="26" r="22" fill="none" stroke="' + (full ? "#B5C99A" : "#E8B86D") + '" stroke-width="6" stroke-linecap="round" stroke-dasharray="' + C.toFixed(2) + '" stroke-dashoffset="' + (C * (1 - pct)).toFixed(2) + '"/></svg><b>' + t + '</b></div>' +
+        '<div class="m-info"><strong>' + esc(n.nombre) + '</strong><small>' + t + " de " + META + " " + estrellas(t) + '</small><span class="m-code">Código <b>' + c + '</b></span></div>' +
+        '<button type="button" class="m-ver" data-code="' + c + '">Ver ficha</button></div>';
+    }).join("") || '<p class="m-empty">No encontramos a nadie con ese nombre.</p>';
+  }
+  function mostrar(v) {
+    [home, maestro, done].forEach(function (el) { var on = el === v; el.hidden = !on; el.classList.toggle("is-on", on); });
+    app.classList.toggle("is-ficha", v !== home);
+  }
+  function cerrarSheet() { scrim.classList.remove("is-on"); sheet.classList.remove("is-on"); scrim.hidden = true; sheet.hidden = true; }
+  function abrirMaestro() {
+    enMaestro = true; cerrarSheet(); boxes.forEach(function (b) { b.value = ""; });
+    renderMaestro(); mostrar(maestro); window.scrollTo(0, mScroll);
+  }
+  document.getElementById("m-q").addEventListener("input", renderMaestro);
+  document.getElementById("m-list").addEventListener("click", function (e) {
+    var b = e.target.closest(".m-ver"); if (!b) return;
+    mScroll = window.scrollY; succeed(NINOS[b.getAttribute("data-code")]);
+  });
+  document.getElementById("m-salir").addEventListener("click", function () {
+    enMaestro = false; mScroll = 0; document.getElementById("m-q").value = ""; mostrar(home); window.scrollTo(0, 0);
+  });
+  function volverLista() { mostrar(maestro); window.scrollTo(0, mScroll); }
+  document.getElementById("volver").addEventListener("click", volverLista);
+  document.getElementById("volver-top").addEventListener("click", volverLista);
+
   function succeed(nino) {
+    document.getElementById("volver").hidden = !enMaestro;
+    document.getElementById("volver-top").hidden = !enMaestro;
+    document.getElementById("salir").hidden = enMaestro;
+    maestro.hidden = true; maestro.classList.remove("is-on");
     render(nino);
     scrim.classList.remove("is-on");
     sheet.classList.remove("is-on");
@@ -1212,7 +1290,8 @@ var CATEGORIAS = [
 
   goBtn.addEventListener("click", function () {
     var code = boxes.map(function (b) { return b.value; }).join("");
-    if (Object.prototype.hasOwnProperty.call(NINOS, code)) succeed(NINOS[code]);
+    if (code === CODIGO_MAESTRO) abrirMaestro();
+    else if (Object.prototype.hasOwnProperty.call(NINOS, code)) { enMaestro = false; succeed(NINOS[code]); }
     else fail();
   });
 })();
