@@ -11,8 +11,15 @@
         "estrellas": 20,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 20
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 22
     },
     {
       "codigo": "0016",
@@ -33,8 +40,15 @@
         "estrellas": 30,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 30
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 32
     },
     {
       "codigo": "0012",
@@ -63,9 +77,15 @@
           "asistencia": 1,
           "comportamiento": 1,
           "versiculo": 0
+        },
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
         }
       ],
-      "total": 4
+      "total": 6
     },
     {
       "codigo": "0009",
@@ -75,8 +95,15 @@
         "estrellas": 35,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 35
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
+        }
+      ],
+      "total": 38
     },
     {
       "codigo": "0013",
@@ -86,8 +113,15 @@
         "estrellas": 12,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 12
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 14
     },
     {
       "codigo": "1703",
@@ -103,9 +137,15 @@
           "asistencia": 1,
           "comportamiento": 0,
           "versiculo": 0
+        },
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
         }
       ],
-      "total": 37
+      "total": 40
     },
     {
       "codigo": "0010",
@@ -165,9 +205,15 @@
           "asistencia": 1,
           "comportamiento": 1,
           "versiculo": 1
+        },
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
         }
       ],
-      "total": 48
+      "total": 51
     },
     {
       "codigo": "0015",
@@ -177,8 +223,15 @@
         "estrellas": 29,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 29
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 31
     },
     {
       "codigo": "0022",
@@ -188,8 +241,15 @@
         "estrellas": 21,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 21
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
+        }
+      ],
+      "total": 24
     },
     {
       "codigo": "0021",
@@ -199,8 +259,15 @@
         "estrellas": 14,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 14
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 16
     },
     {
       "codigo": "0024",
@@ -214,17 +281,6 @@
       "total": 2
     },
     {
-      "codigo": "0014",
-      "nombre": "Martina Acosta",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 48,
-        "hasta": "2026-10-18"
-      },
-      "registros": [],
-      "total": 48
-    },
-    {
       "codigo": "0018",
       "nombre": "Martín Terán",
       "meta": 50,
@@ -232,8 +288,33 @@
         "estrellas": 34,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 34
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
+        }
+      ],
+      "total": 37
+    },
+    {
+      "codigo": "0014",
+      "nombre": "Martina Acosta",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 48,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 50
     },
     {
       "codigo": "0011",
@@ -243,8 +324,15 @@
         "estrellas": 40,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 40
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 42
     },
     {
       "codigo": "0019",
@@ -318,8 +406,15 @@
         "estrellas": 28,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 28
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
+        }
+      ],
+      "total": 31
     },
     {
       "codigo": "0006",
@@ -329,8 +424,15 @@
         "estrellas": 10,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 10
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
+        }
+      ],
+      "total": 13
     },
     {
       "codigo": "1809",
@@ -340,8 +442,15 @@
         "estrellas": 2,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 2
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 4
     }
   ]
 }
