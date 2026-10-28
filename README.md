@@ -40,7 +40,23 @@ En el JS de `index.html`:
    - `total` = estrellas del **ciclo actual** hacia la meta (no un acumulado infinito).
    - **Meta 50 / premio:** al llegar a 50 el total del ciclo se muestra como 50; el excedente de esa semana se **descarta**; la siguiente semana inicia un ciclo nuevo desde 0. En la ficha aparece una línea con tag «Premio» entre el ciclo cerrado y el nuevo.
    - En el cartel físico, cualquier casilla marcada = **1 estrella**.
-   - Código demo `1111` (Hady + domingo siguiente): prueba visual del premio; marcado `prueba: true` y **no** aparece en el panel maestro `7777`.
+
+## Meta y premio (solución de diseño para copiar)
+
+Regla usada en Gracia Escuelita; si copias este sistema (p. ej. para el Pastor Luchito), copia también esta regla:
+
+- **Meta = 50 estrellas por ciclo** (`META = 50` en `index.html`).
+- **Tope en 50:** si un domingo haría pasar el total de 50, el total del ciclo queda en **50** y el **excedente se descarta**. No pasa al ciclo siguiente.
+- **Cierre del ciclo:** en el tablero aparece una línea divisoria con un tag **«Premio»** plano (2D: sin relieve, sin gradiente, sin sombra 3D).
+- **Ciclo siguiente:** empieza en **0**. El anillo muestra solo el total del **ciclo actual**.
+
+**Dónde está en el código (`index.html`):**
+- `ciclosDe(nino)`: recorre el saldo inicial y los domingos, cierra el ciclo al llegar a `META`, guarda el excedente descartado y devuelve `totalActual`.
+- `totalDe(n)`: devuelve `ciclosDe(n).totalActual` (lo usa el panel maestro).
+- CSS `.tab-premio` / `.tab-premio-pill`: la línea divisoria y el tag plano «Premio».
+- Render en el tablero: la ficha del niño inserta el separador «Premio» donde `ciclosDe` marca `tipo: "premio"`.
+
+**Ejemplo real:** Hady (código `0303`) cerró el ciclo en **50** el **25 oct 2026**. Sin el tope habría tenido 51; esa estrella extra se descartó.
 
 ## Cómo probar en local
 

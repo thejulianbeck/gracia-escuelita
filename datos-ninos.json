@@ -1,5 +1,5 @@
 {
-  "nota": "Exportación de niños reales desde NINOS en index.html. total = estrellas del ciclo actual (META=50): al llegar a la meta el excedente se descarta y el siguiente ciclo parte en 0. Los códigos con prueba:true (p.ej. 1111) no se incluyen.",
+  "nota": "Exportación de niños reales desde NINOS en index.html. total = estrellas del ciclo actual (META=50): al llegar a la meta el excedente se descarta y el siguiente ciclo parte en 0.",
   "meta": 50,
   "actualizado": "2026-10-28",
   "reglaPremio": "Al acumular META el total del ciclo se tapa en 50, el excedente de esa semana se descarta, y el ciclo siguiente inicia en 0.",
