@@ -1,8 +1,59 @@
 {
+  "nota": "Exportación de niños desde NINOS en index.html. total = (saldoInicial.estrellas si existe) + suma de marcas en registros (asistencia + comportamiento + versiculo; cada marca = 1 estrella).",
   "meta": 50,
-  "nota": "Exportación de niños reales desde NINOS en index.html. total = (saldoInicial.estrellas si existe) + suma de marcas en registros (asistencia + comportamiento + versiculo; cada marca = 1 estrella).",
-  "actualizadoDesde": "index.html (objeto NINOS)",
+  "actualizado": "2026-10-25",
   "ninos": [
+    {
+      "codigo": "0002",
+      "nombre": "Nicolás Narváez",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 42,
+        "hasta": "2026-10-18"
+      },
+      "registros": [],
+      "total": 42
+    },
+    {
+      "codigo": "0003",
+      "nombre": "Elisa Puerta",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 37,
+        "hasta": "2026-10-18"
+      },
+      "registros": [],
+      "total": 37
+    },
+    {
+      "codigo": "0004",
+      "nombre": "Gia Carrión",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 4,
+        "hasta": "2026-10-18"
+      },
+      "registros": [],
+      "total": 4
+    },
+    {
+      "codigo": "0006",
+      "nombre": "Samuel Delgado",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 10,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
+        }
+      ],
+      "total": 13
+    },
     {
       "codigo": "0008",
       "nombre": "Aitana Hernández",
@@ -22,22 +73,40 @@
       "total": 22
     },
     {
-      "codigo": "0016",
-      "nombre": "Alegría López",
+      "codigo": "0009",
+      "nombre": "Ariana Arcos",
       "meta": 50,
       "saldoInicial": {
-        "estrellas": 30,
+        "estrellas": 35,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
+        }
+      ],
+      "total": 38
+    },
+    {
+      "codigo": "0010",
+      "nombre": "Doménica Panta",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 13,
         "hasta": "2026-10-18"
       },
       "registros": [],
-      "total": 30
+      "total": 13
     },
     {
-      "codigo": "0109",
-      "nombre": "Amelia Chiran",
+      "codigo": "0011",
+      "nombre": "Micaela Bravo",
       "meta": 50,
       "saldoInicial": {
-        "estrellas": 30,
+        "estrellas": 40,
         "hasta": "2026-10-18"
       },
       "registros": [
@@ -48,7 +117,7 @@
           "versiculo": 0
         }
       ],
-      "total": 32
+      "total": 42
     },
     {
       "codigo": "0012",
@@ -60,6 +129,187 @@
       },
       "registros": [],
       "total": 20
+    },
+    {
+      "codigo": "0013",
+      "nombre": "Catalina Acosta",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 12,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 14
+    },
+    {
+      "codigo": "0014",
+      "nombre": "Martina Acosta",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 48,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 50
+    },
+    {
+      "codigo": "0015",
+      "nombre": "Josué Delgado",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 29,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 31
+    },
+    {
+      "codigo": "0016",
+      "nombre": "Alegría López",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 30,
+        "hasta": "2026-10-18"
+      },
+      "registros": [],
+      "total": 30
+    },
+    {
+      "codigo": "0017",
+      "nombre": "Paula Terán",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 39,
+        "hasta": "2026-10-18"
+      },
+      "registros": [],
+      "total": 39
+    },
+    {
+      "codigo": "0018",
+      "nombre": "Martín Terán",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 34,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
+        }
+      ],
+      "total": 37
+    },
+    {
+      "codigo": "0019",
+      "nombre": "Milan Panta",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 36,
+        "hasta": "2026-10-18"
+      },
+      "registros": [],
+      "total": 36
+    },
+    {
+      "codigo": "0020",
+      "nombre": "Francesc Ortiz Puente",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 8,
+        "hasta": "2026-10-18"
+      },
+      "registros": [],
+      "total": 8
+    },
+    {
+      "codigo": "0021",
+      "nombre": "Luciana Hernández",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 14,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 16
+    },
+    {
+      "codigo": "0022",
+      "nombre": "Liam Tumbaco",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 21,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 1
+        }
+      ],
+      "total": 24
+    },
+    {
+      "codigo": "0023",
+      "nombre": "Paula Narváez",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 6,
+        "hasta": "2026-10-18"
+      },
+      "registros": [
+        {
+          "fecha": "2026-10-25",
+          "asistencia": 1,
+          "comportamiento": 1,
+          "versiculo": 0
+        }
+      ],
+      "total": 8
+    },
+    {
+      "codigo": "0024",
+      "nombre": "Luisa Arteaga",
+      "meta": 50,
+      "saldoInicial": {
+        "estrellas": 2,
+        "hasta": "2026-10-18"
+      },
+      "registros": [],
+      "total": 2
     },
     {
       "codigo": "0025",
@@ -88,29 +338,11 @@
       "total": 6
     },
     {
-      "codigo": "0009",
-      "nombre": "Ariana Arcos",
+      "codigo": "0109",
+      "nombre": "Amelia Chiran",
       "meta": 50,
       "saldoInicial": {
-        "estrellas": 35,
-        "hasta": "2026-10-18"
-      },
-      "registros": [
-        {
-          "fecha": "2026-10-25",
-          "asistencia": 1,
-          "comportamiento": 1,
-          "versiculo": 1
-        }
-      ],
-      "total": 38
-    },
-    {
-      "codigo": "0013",
-      "nombre": "Catalina Acosta",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 12,
+        "estrellas": 30,
         "hasta": "2026-10-18"
       },
       "registros": [
@@ -121,75 +353,7 @@
           "versiculo": 0
         }
       ],
-      "total": 14
-    },
-    {
-      "codigo": "1703",
-      "nombre": "Charlie Escalante",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 36,
-        "hasta": "2026-10-11"
-      },
-      "registros": [
-        {
-          "fecha": "2026-10-18",
-          "asistencia": 1,
-          "comportamiento": 0,
-          "versiculo": 0
-        },
-        {
-          "fecha": "2026-10-25",
-          "asistencia": 1,
-          "comportamiento": 1,
-          "versiculo": 1
-        }
-      ],
-      "total": 40
-    },
-    {
-      "codigo": "0010",
-      "nombre": "Doménica Panta",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 13,
-        "hasta": "2026-10-18"
-      },
-      "registros": [],
-      "total": 13
-    },
-    {
-      "codigo": "0003",
-      "nombre": "Elisa Puerta",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 37,
-        "hasta": "2026-10-18"
-      },
-      "registros": [],
-      "total": 37
-    },
-    {
-      "codigo": "0020",
-      "nombre": "Francesc Ortiz Puente",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 8,
-        "hasta": "2026-10-18"
-      },
-      "registros": [],
-      "total": 8
-    },
-    {
-      "codigo": "0004",
-      "nombre": "Gia Carrión",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 4,
-        "hasta": "2026-10-18"
-      },
-      "registros": [],
-      "total": 4
+      "total": 32
     },
     {
       "codigo": "0303",
@@ -216,32 +380,20 @@
       "total": 51
     },
     {
-      "codigo": "0015",
-      "nombre": "Josué Delgado",
+      "codigo": "1703",
+      "nombre": "Charlie Escalante",
       "meta": 50,
       "saldoInicial": {
-        "estrellas": 29,
-        "hasta": "2026-10-18"
+        "estrellas": 36,
+        "hasta": "2026-10-11"
       },
       "registros": [
         {
-          "fecha": "2026-10-25",
+          "fecha": "2026-10-18",
           "asistencia": 1,
-          "comportamiento": 1,
+          "comportamiento": 0,
           "versiculo": 0
-        }
-      ],
-      "total": 31
-    },
-    {
-      "codigo": "0022",
-      "nombre": "Liam Tumbaco",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 21,
-        "hasta": "2026-10-18"
-      },
-      "registros": [
+        },
         {
           "fecha": "2026-10-25",
           "asistencia": 1,
@@ -249,154 +401,25 @@
           "versiculo": 1
         }
       ],
-      "total": 24
+      "total": 40
     },
     {
-      "codigo": "0021",
-      "nombre": "Luciana Hernández",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 14,
-        "hasta": "2026-10-18"
-      },
-      "registros": [
-        {
-          "fecha": "2026-10-25",
-          "asistencia": 1,
-          "comportamiento": 1,
-          "versiculo": 0
-        }
-      ],
-      "total": 16
-    },
-    {
-      "codigo": "0024",
-      "nombre": "Luisa Arteaga",
+      "codigo": "1809",
+      "nombre": "Thomas Chiran",
       "meta": 50,
       "saldoInicial": {
         "estrellas": 2,
         "hasta": "2026-10-18"
       },
-      "registros": [],
-      "total": 2
-    },
-    {
-      "codigo": "0018",
-      "nombre": "Martín Terán",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 34,
-        "hasta": "2026-10-18"
-      },
       "registros": [
         {
           "fecha": "2026-10-25",
-          "asistencia": 1,
-          "comportamiento": 1,
-          "versiculo": 1
-        }
-      ],
-      "total": 37
-    },
-    {
-      "codigo": "0014",
-      "nombre": "Martina Acosta",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 48,
-        "hasta": "2026-10-18"
-      },
-      "registros": [
-        {
-          "fecha": "2026-10-25",
-          "asistencia": 1,
-          "comportamiento": 1,
-          "versiculo": 0
-        }
-      ],
-      "total": 50
-    },
-    {
-      "codigo": "0011",
-      "nombre": "Micaela Bravo",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 40,
-        "hasta": "2026-10-18"
-      },
-      "registros": [
-        {
-          "fecha": "2026-10-25",
-          "asistencia": 1,
-          "comportamiento": 1,
-          "versiculo": 0
-        }
-      ],
-      "total": 42
-    },
-    {
-      "codigo": "0019",
-      "nombre": "Milan Panta",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 36,
-        "hasta": "2026-10-18"
-      },
-      "registros": [],
-      "total": 36
-    },
-    {
-      "codigo": "0002",
-      "nombre": "Nicolás Narváez",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 42,
-        "hasta": "2026-10-18"
-      },
-      "registros": [],
-      "total": 42
-    },
-    {
-      "codigo": "2612",
-      "nombre": "Noah Jara",
-      "meta": 50,
-      "registros": [
-        {
-          "fecha": "2026-10-11",
-          "asistencia": 1,
-          "comportamiento": 1,
-          "versiculo": 0
-        },
-        {
-          "fecha": "2026-10-18",
           "asistencia": 1,
           "comportamiento": 1,
           "versiculo": 0
         }
       ],
       "total": 4
-    },
-    {
-      "codigo": "0023",
-      "nombre": "Paula Narváez",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 6,
-        "hasta": "2026-10-18"
-      },
-      "registros": [],
-      "total": 6
-    },
-    {
-      "codigo": "0017",
-      "nombre": "Paula Terán",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 39,
-        "hasta": "2026-10-18"
-      },
-      "registros": [],
-      "total": 39
     },
     {
       "codigo": "2011",
@@ -417,34 +440,18 @@
       "total": 31
     },
     {
-      "codigo": "0006",
-      "nombre": "Samuel Delgado",
+      "codigo": "2612",
+      "nombre": "Noah Jara",
       "meta": 50,
-      "saldoInicial": {
-        "estrellas": 10,
-        "hasta": "2026-10-18"
-      },
       "registros": [
         {
-          "fecha": "2026-10-25",
+          "fecha": "2026-10-11",
           "asistencia": 1,
           "comportamiento": 1,
-          "versiculo": 1
-        }
-      ],
-      "total": 13
-    },
-    {
-      "codigo": "1809",
-      "nombre": "Thomas Chiran",
-      "meta": 50,
-      "saldoInicial": {
-        "estrellas": 2,
-        "hasta": "2026-10-18"
-      },
-      "registros": [
+          "versiculo": 0
+        },
         {
-          "fecha": "2026-10-25",
+          "fecha": "2026-10-18",
           "asistencia": 1,
           "comportamiento": 1,
           "versiculo": 0
