@@ -1,7 +1,8 @@
 {
-  "nota": "Exportación de niños desde NINOS en index.html. total = (saldoInicial.estrellas si existe) + suma de marcas en registros (asistencia + comportamiento + versiculo; cada marca = 1 estrella).",
+  "nota": "Exportación de niños reales desde NINOS en index.html. total = estrellas del ciclo actual (META=50): al llegar a la meta el excedente se descarta y el siguiente ciclo parte en 0. Los códigos con prueba:true (p.ej. 1111) no se incluyen.",
   "meta": 50,
-  "actualizado": "2026-10-25",
+  "actualizado": "2026-10-28",
+  "reglaPremio": "Al acumular META el total del ciclo se tapa en 50, el excedente de esa semana se descarta, y el ciclo siguiente inicia en 0.",
   "ninos": [
     {
       "codigo": "0002",
@@ -164,7 +165,8 @@
           "versiculo": 0
         }
       ],
-      "total": 50
+      "total": 50,
+      "cicloCerrado": true
     },
     {
       "codigo": "0015",
@@ -377,7 +379,8 @@
           "versiculo": 1
         }
       ],
-      "total": 51
+      "total": 50,
+      "cicloCerrado": true
     },
     {
       "codigo": "1703",
