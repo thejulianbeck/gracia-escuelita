@@ -37,8 +37,10 @@ En el JS de `index.html`:
 3. **Cómo se interpreta cada niño:**
    - `saldoInicial`: estrellas acumuladas en el cartel físico **hasta** una fecha (sin desglose por domingo).
    - `registros`: filas semanales (domingo a domingo) desde que empezó el sistema digital; cada campo `asistencia` / `comportamiento` / `versiculo` es `0` o `1`.
-   - `total` = `saldoInicial.estrellas` (si existe) + suma de todas las marcas en `registros`.
+   - `total` = estrellas del **ciclo actual** hacia la meta (no un acumulado infinito).
+   - **Meta 50 / premio:** al llegar a 50 el total del ciclo se muestra como 50; el excedente de esa semana se **descarta**; la siguiente semana inicia un ciclo nuevo desde 0. En la ficha aparece una línea con tag «Premio» entre el ciclo cerrado y el nuevo.
    - En el cartel físico, cualquier casilla marcada = **1 estrella**.
+   - Código demo `1111` (Hady + domingo siguiente): prueba visual del premio; marcado `prueba: true` y **no** aparece en el panel maestro `7777`.
 
 ## Cómo probar en local
 
