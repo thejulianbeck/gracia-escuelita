@@ -432,14 +432,11 @@
 
   /* —— Premio (división de ciclo) —— */
   .tab-premio { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin: 10px 4px 6px; padding: 4px 0; }
-  .tab-premio::before, .tab-premio::after { content: ""; flex: 1; height: 2px; border-radius: 2px;
-    background: linear-gradient(90deg, transparent, #E8D4A8 20%, #E8D4A8 80%, transparent); }
+  .tab-premio::before, .tab-premio::after { content: ""; flex: 1; height: 1px; background: #E8D4A8; }
   .tab-premio-pill { flex: 0 0 auto; font-family: "Fredoka", sans-serif; font-weight: 700; font-size: .78rem;
-    letter-spacing: .04em; text-transform: uppercase; color: #6B8F4E; background: linear-gradient(180deg, #E8F0DC, #D4E4C0);
-    border: 1.5px solid #B5C99A; border-radius: 999px; padding: 5px 14px; box-shadow: 0 1px 0 rgba(255,255,255,.8) inset,
-    0 2px 6px rgba(107,143,78,.12); }
-  .tab-premio-pill.oro { color: #9A7420; background: linear-gradient(180deg, #FFF3D6, #F3CD86); border-color: #E8B86D;
-    box-shadow: 0 1px 0 rgba(255,255,255,.85) inset, 0 2px 6px rgba(154,116,32,.12); }
+    letter-spacing: .04em; text-transform: uppercase; color: #6B8F4E; background: #E8F0DC;
+    border: 1.5px solid #B5C99A; border-radius: 999px; padding: 5px 14px; box-shadow: none; }
+  .tab-premio-pill.oro { color: #9A7420; background: #FFF3D6; border-color: #E8B86D; box-shadow: none; }
   /* —— Sheet —— */
   .scrim {
     position: fixed;
