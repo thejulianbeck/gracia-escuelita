@@ -1,6 +1,6 @@
 {
   "meta": 50,
-  "nota": "Exportación de niños reales desde NINOS en index.html. total = (saldoInicial.estrellas si existe) + suma de marcas en registros (asistencia + comportamiento + versiculo; cada marca = 1 estrella). Códigos de prueba (1234, 2222, …) no se incluyen.",
+  "nota": "Exportación de niños reales desde NINOS en index.html. total = (saldoInicial.estrellas si existe) + suma de marcas en registros (asistencia + comportamiento + versiculo; cada marca = 1 estrella).",
   "actualizadoDesde": "index.html (objeto NINOS)",
   "ninos": [
     {

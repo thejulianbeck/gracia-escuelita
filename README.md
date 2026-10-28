@@ -33,7 +33,7 @@ En el JS de `index.html`:
 ### Fuente viva vs. exportación
 
 1. **Fuente viva de estrellas hoy:** el objeto `NINOS` dentro de [`index.html`](./index.html). Ahí se editan saldos y registros semanales.
-2. **Exportación para otra base de datos:** [`datos-ninos.json`](./datos-ninos.json) es la misma información de niños **reales** (sin códigos de prueba), lista para que otro sistema (por ejemplo el del pastor) la importe o la copie.
+2. **Exportación para otra base de datos:** [`datos-ninos.json`](./datos-ninos.json) es la misma información de los niños reales, lista para que otro sistema (por ejemplo el del pastor) la importe o la copie.
 3. **Cómo se interpreta cada niño:**
    - `saldoInicial`: estrellas acumuladas en el cartel físico **hasta** una fecha (sin desglose por domingo).
    - `registros`: filas semanales (domingo a domingo) desde que empezó el sistema digital; cada campo `asistencia` / `comportamiento` / `versiculo` es `0` o `1`.
@@ -49,11 +49,6 @@ python3 -m http.server 8080
 ```
 
 Luego visita `http://localhost:8080`.
-
-## Códigos de prueba
-
-En el archivo hay códigos solo de demo: `1234`, `2222`, `3333`, `4444`, `5555`, `6666`, `8888`.  
-Los niños reales están en `NINOS` / `datos-ninos.json` y se listan con el modo maestro `7777`.
 
 ## Nota de integración
 
