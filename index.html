@@ -429,6 +429,17 @@
     background: linear-gradient(180deg, #F3E8D8 0%, #FFF9F0 70%); box-shadow: 0 3px 5px rgba(74,52,40,.09) inset; }
   .tab-c.on .well { background: var(--acc-soft); box-shadow: none; }
   .tab-c svg { width: 34px; height: 32px; filter: drop-shadow(0 2px 2px rgba(74,52,40,.15)); }
+
+  /* —— Premio (división de ciclo) —— */
+  .tab-premio { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin: 10px 4px 6px; padding: 4px 0; }
+  .tab-premio::before, .tab-premio::after { content: ""; flex: 1; height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #E8D4A8 20%, #E8D4A8 80%, transparent); }
+  .tab-premio-pill { flex: 0 0 auto; font-family: "Fredoka", sans-serif; font-weight: 700; font-size: .78rem;
+    letter-spacing: .04em; text-transform: uppercase; color: #6B8F4E; background: linear-gradient(180deg, #E8F0DC, #D4E4C0);
+    border: 1.5px solid #B5C99A; border-radius: 999px; padding: 5px 14px; box-shadow: 0 1px 0 rgba(255,255,255,.8) inset,
+    0 2px 6px rgba(107,143,78,.12); }
+  .tab-premio-pill.oro { color: #9A7420; background: linear-gradient(180deg, #FFF3D6, #F3CD86); border-color: #E8B86D;
+    box-shadow: 0 1px 0 rgba(255,255,255,.85) inset, 0 2px 6px rgba(154,116,32,.12); }
   /* —— Sheet —— */
   .scrim {
     position: fixed;
@@ -769,6 +780,8 @@ var NINOS = {
   /* saldoInicial: estrellas acumuladas antes de llevar registro por domingo (sin desglose) */
   "1703": { nombre: "Charlie Escalante",       layout: "tablero", saldoInicial: { estrellas: 36, hasta: "2026-10-11" }, registros: [{ fecha: "2026-10-18", asistencia: true }, { fecha: "2026-10-25", asistencia: true, comportamiento: true, versiculo: true }] },
   "0303": { nombre: "Hady Escalante",          layout: "tablero", saldoInicial: { estrellas: 45, hasta: "2026-10-11" }, registros: [{ fecha: "2026-10-18", asistencia: true, comportamiento: true, versiculo: true }, { fecha: "2026-10-25", asistencia: true, comportamiento: true, versiculo: true }] },
+  /* Demo premio: misma base que Hady + domingo 1 nov; no sale en panel 7777 */
+  "1111": { nombre: "Hady Escalante · demo", layout: "tablero", prueba: true, etiqueta: "Demo premio", saldoInicial: { estrellas: 45, hasta: "2026-10-11" }, registros: [{ fecha: "2026-10-18", asistencia: true, comportamiento: true, versiculo: true }, { fecha: "2026-10-25", asistencia: true, comportamiento: true, versiculo: true }, { fecha: "2026-11-01", asistencia: true, comportamiento: true, versiculo: true }] },
   "1809": { nombre: "Thomas Chiran", layout: "tablero", saldoInicial: { estrellas: 2, hasta: "2026-10-18" }, registros: [{ fecha: "2026-10-25", asistencia: true, comportamiento: true, versiculo: false }] },
   "0002": { nombre: "Nicolás Narváez", layout: "tablero", saldoInicial: { estrellas: 42, hasta: "2026-10-18" }, registros: [] },
   "0003": { nombre: "Elisa Puerta", layout: "tablero", saldoInicial: { estrellas: 37, hasta: "2026-10-18" }, registros: [] },
@@ -858,6 +871,59 @@ var CATEGORIAS = [
   function estrellas(n) { return n === 1 ? "estrella" : "estrellas"; }
   var fmtCorto = new Intl.DateTimeFormat("es", { day: "numeric", month: "short", timeZone: "UTC" });
   function corto(iso) { return fmtCorto.format(new Date(iso + "T12:00:00Z")).replace(".", ""); }
+  function estrellasReg(r) {
+    var n = 0;
+    CATEGORIAS.forEach(function (c) { if (r[c.key]) n++; });
+    return n;
+  }
+  /* Recorre saldo + domingos: al llegar a META el ciclo cierra, el excedente se descarta y el siguiente ciclo parte en 0. */
+  function ciclosDe(nino) {
+    var items = [];
+    var ciclo = 0;
+    var saldo = nino.saldoInicial;
+    if (saldo && saldo.estrellas) {
+      var se = saldo.estrellas | 0;
+      if (se >= META) {
+        items.push({ tipo: "saldo", estrellas: META, hasta: saldo.hasta, descartado: se - META });
+        items.push({ tipo: "premio", descartado: se - META });
+        ciclo = 0;
+      } else {
+        items.push({ tipo: "saldo", estrellas: se, hasta: saldo.hasta });
+        ciclo = se;
+      }
+    }
+    var regs = (nino.registros || []).slice().sort(function (a, b) {
+      return a.fecha < b.fecha ? -1 : a.fecha > b.fecha ? 1 : 0;
+    });
+    regs.forEach(function (r) {
+      var week = estrellasReg(r);
+      items.push({ tipo: "domingo", fecha: r.fecha, registro: r, estrellas: week });
+      if (ciclo + week >= META) {
+        items.push({ tipo: "premio", descartado: Math.max(0, ciclo + week - META) });
+        ciclo = 0;
+      } else {
+        ciclo += week;
+      }
+    });
+    var cerrado = items.length > 0 && items[items.length - 1].tipo === "premio";
+    var totalActual = cerrado ? META : ciclo;
+    var cats = { asistencia: 0, comportamiento: 0, versiculo: 0, total: 0 };
+    var start = 0, end = items.length;
+    if (cerrado) {
+      end = items.length - 1;
+      for (var j = 0; j < end; j++) if (items[j].tipo === "premio") start = j + 1;
+    } else {
+      for (var i = 0; i < items.length; i++) if (items[i].tipo === "premio") start = i + 1;
+    }
+    for (var k = start; k < end; k++) {
+      var it = items[k];
+      if (it.tipo !== "domingo") continue;
+      CATEGORIAS.forEach(function (c) {
+        if (it.registro[c.key]) { cats[c.key]++; cats.total++; }
+      });
+    }
+    return { items: items, totalActual: totalActual, cats: cats, cerrado: cerrado };
+  }
   function contar(regs) {
     var t = { total: 0 };
     CATEGORIAS.forEach(function (c) { t[c.key] = regs.filter(function (r) { return r[c.key]; }).length; t.total += t[c.key]; });
@@ -876,33 +942,48 @@ var CATEGORIAS = [
       (full ? '<i class="sp sp1">' + spark + '</i><i class="sp sp2">' + spark + '</i><i class="sp sp3">' + spark + '</i>' : "") +
       '</div><p class="anillo-pie">' + (full ? "¡Meta cumplida! " + t.total + " " + estrellas(t.total) : t.total + " " + estrellas(t.total) + " · meta " + META) + '</p></div>';
   }
-  function renderTablero(nino, regs, t) {
+  function filaPremio(oro) {
+    return '<div class="tab-premio" role="separator" aria-label="Premio"><span class="tab-premio-pill' + (oro ? " oro" : "") + '">Premio</span></div>';
+  }
+  function filaDomingo(r) {
+    var k = estrellasReg(r);
+    var h = '<div class="tab-d">' + corto(r.fecha) + "<small>" + k + " " + estrellas(k) + "</small></div>";
+    CATEGORIAS.forEach(function (c) {
+      h += '<div class="tab-c cat ' + c.cls + (r[c.key] ? " on" : "") + '" aria-label="' + c.label + (r[c.key] ? ": sí" : ": no") + '"><span class="well">' + (r[c.key] ? svg("puffy") : "") + "</span></div>";
+    });
+    return h;
+  }
+  function renderTablero(nino) {
+    var cicloInfo = ciclosDe(nino);
     var abrev = { asistencia: "Asistencia", comportamiento: "Conducta", versiculo: "Versículo" };
-    var h = '';
-    var t0 = t;
-    var saldo = nino.saldoInicial;
-    if (saldo && saldo.estrellas) {
-      h += '<div class="tab-saldo"><span class="tab-saldo-ico">' + svg("puffy") + '</span><span><b>Hasta el ' + corto(saldo.hasta) + '</b><small>' + saldo.estrellas + " " + (saldo.estrellas === 1 ? "estrella acumulada" : "estrellas acumuladas") + '</small></span><em>' + saldo.estrellas + '</em></div>';
-      t = Object.assign({}, t, { total: t.total + saldo.estrellas });
+    var h = "";
+    var saldoItem = null;
+    cicloInfo.items.forEach(function (it) { if (it.tipo === "saldo" && !saldoItem) saldoItem = it; });
+    if (saldoItem && saldoItem.estrellas) {
+      h += '<div class="tab-saldo"><span class="tab-saldo-ico">' + svg("puffy") + '</span><span><b>Hasta el ' + corto(saldoItem.hasta) + '</b><small>' + saldoItem.estrellas + " " + (saldoItem.estrellas === 1 ? "estrella acumulada" : "estrellas acumuladas") + '</small></span><em>' + saldoItem.estrellas + '</em></div>';
     }
     h += '<div class="tab-h first">Domingo</div>';
     CATEGORIAS.forEach(function (c) { h += '<div class="tab-h cat ' + c.cls + '"><span class="cat-dot">' + svg("mini", ' class="ico"') + "</span>" + abrev[c.key] + "</div>"; });
     h += '<div class="tab-tot first">Total</div>';
-    CATEGORIAS.forEach(function (c) { h += '<div class="tab-tot cat ' + c.cls + '">' + t0[c.key] + "</div>"; });
-    regs.forEach(function (r) {
-      var k = CATEGORIAS.filter(function (c) { return r[c.key]; }).length;
-      h += '<div class="tab-d">' + corto(r.fecha) + "<small>" + k + " " + estrellas(k) + "</small></div>";
-      CATEGORIAS.forEach(function (c) {
-        h += '<div class="tab-c cat ' + c.cls + (r[c.key] ? " on" : "") + '" aria-label="' + c.label + (r[c.key] ? ": sí" : ": no") + '"><span class="well">' + (r[c.key] ? svg("puffy") : "") + "</span></div>";
-      });
+    CATEGORIAS.forEach(function (c) { h += '<div class="tab-tot cat ' + c.cls + '">' + cicloInfo.cats[c.key] + "</div>"; });
+    var items = cicloInfo.items;
+    items.forEach(function (it, idx) {
+      if (it.tipo === "saldo") return;
+      if (it.tipo === "premio") {
+        /* Solo mostrar la línea «Premio» si hay domingos del ciclo nuevo después */
+        var hayNuevo = false;
+        for (var j = idx + 1; j < items.length; j++) if (items[j].tipo === "domingo") { hayNuevo = true; break; }
+        if (hayNuevo) h += filaPremio(true);
+        return;
+      }
+      if (it.tipo === "domingo") h += filaDomingo(it.registro);
     });
-    return cabeceraAnillo(nino, t) + '<div class="card tab"><div class="tab-grid">' + h + "</div></div>";
+    return cabeceraAnillo(nino, { total: cicloInfo.totalActual }) + '<div class="card tab"><div class="tab-grid">' + h + "</div></div>";
   }
 
   function render(nino) {
     var alt = document.getElementById("f-alt");
-    var regs = (nino.registros || []).slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; });
-    alt.innerHTML = renderTablero(nino, regs, contar(regs));
+    alt.innerHTML = renderTablero(nino);
     var arcs = alt.querySelectorAll(".anillo [data-off]");
     if (arcs.length) requestAnimationFrame(function () { requestAnimationFrame(function () {
       Array.prototype.forEach.call(arcs, function (a) { a.style.strokeDashoffset = a.getAttribute("data-off"); });
@@ -911,8 +992,8 @@ var CATEGORIAS = [
 
   var CODIGO_MAESTRO = "7777";
   var maestro = document.getElementById("maestro"), enMaestro = false, mScroll = 0;
-  function totalDe(n) { var t = contar(n.registros || []).total; return t + ((n.saldoInicial && n.saldoInicial.estrellas) || 0); }
-  function esReal(code) { return !!NINOS[code]; }
+  function totalDe(n) { return ciclosDe(n).totalActual; }
+  function esReal(code) { var n = NINOS[code]; return !!n && !n.prueba; }
   function sinAcento(t) { return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
   function renderMaestro() {
     var q = sinAcento(document.getElementById("m-q").value.trim());
